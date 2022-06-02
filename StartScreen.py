@@ -1,6 +1,7 @@
 import pyautogui
 import pygame
 from pygame.locals import *
+import Main
 
 import GameState
 import UIElement
@@ -26,26 +27,24 @@ def startScreen():
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
-    quitElement = UIElement.UIElement(
+    titleElement = UIElement.UIElement(
         center_position=(width*3 / 4, height* 5 / 6),
         font_size=30,
         bg_rgb=WHITE,
         text_rgb=BLACK,
-        text="Quit",
-        action=GameState.GameStates.QUIT,
+        text="Back to Title Screen",
+        action=GameState.GameStates.TITLE,
     )
 
     while 1:
         mouse_up = False
         for event in pygame.event.get():
-            if event.type == QUIT:
-                return
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 mouse_up = True
-        quit_action = quitElement.update(pygame.mouse.get_pos(), mouse_up)
-        if quit_action is not None:
-            return
-        quitElement.draw(screen)
+        title_action = titleElement.update(pygame.mouse.get_pos(), mouse_up)
+        if title_action is not None:
+            return Main.main()
+        titleElement.draw(screen)
         #screen.blit(background, (0, 0))
         pygame.display.flip()
     

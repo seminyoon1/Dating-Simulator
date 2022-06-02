@@ -1,3 +1,0 @@
-pythonscreen.py
-
-pause
