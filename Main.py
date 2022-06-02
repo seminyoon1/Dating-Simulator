@@ -33,32 +33,37 @@ def main():
     background = pygame.transform.scale(background, (width, height))
 
     # Display some text
-    font = pygame.font.Font(None, 60)
-    text = font.render("CALC GANG DATING SIM", 1, (BLUE))
-    textpos = text.get_rect(center=(width/2, height/2))
-    textpos.centerx = background.get_rect().centerx
-    background.blit(text, textpos)
+    fontsize = 60
+    font = pygame.font.Font(None, fontsize)
+    font2 = pygame.font.Font(None, int(fontsize*2/3))
+    text1 = font.render("CALC GANG", 1, (BLACK))
+    text2 = font2.render("DATING SIMULATOR", 1, (BLACK))
+    #textpos = text.get_rect(center=(width/2, height/2))
+    #textpos.centerx = background.get_rect().centerx
+    background.blit(text1, (width/8, height/4))
+    background.blit(text2, (width/8, height/4 + fontsize))
 
     # Blit everything to the screen
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
     # create ui elements
-    quitElement = UIElement.UIElement(
-        center_position=(width*3 / 4, height* 5 / 6),
-        font_size=30,
-        bg_rgb=WHITE,
-        text_rgb=BLACK,
-        text="Quit",
-        action=GameState.GameStates.QUIT,
-    )
     startElement = UIElement.UIElement(
-        center_position=(width / 2, height* 5 / 6),
-        font_size=30,
-        bg_rgb=WHITE,
+        center_position=(width/6, height* 3 / 6),
+        font_size=fontsize*2/3,
+        bg_rgb=None,
         text_rgb=BLACK,
         text="Start",
         action= GameState.GameStates.START,
+    )
+
+    quitElement = UIElement.UIElement(
+        center_position=(width/6, height* 4 / 6),
+        font_size=fontsize*2/3,
+        bg_rgb=None,
+        text_rgb=BLACK,
+        text="Quit",
+        action=GameState.GameStates.QUIT,
     )
 
     # Event loop
