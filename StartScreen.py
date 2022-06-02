@@ -10,13 +10,14 @@ BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-def startScreen(): 
+def StartScreen(): 
     width, height = pyautogui.size()
-
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Calc Gang Dating Simulator')
 
-    background = pygame.Surface(screen.get_size())
+    background = pygame.image.load('Assets\image.jpg')
+    background = pygame.transform.scale(background, (width, height))
+
 
     font = pygame.font.Font(None, 60)
     text = font.render("CALC GANG DATING SIM", 1, (BLUE))

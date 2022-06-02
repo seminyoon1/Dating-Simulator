@@ -29,7 +29,7 @@ def main():
 
 
     #Get Background image
-    background = pygame.image.load('image.jpg')
+    background = pygame.image.load('Assets\image.jpg')
     background = pygame.transform.scale(background, (width, height))
 
     # Display some text
@@ -74,7 +74,7 @@ def main():
             return
         start_action = startElement.update(pygame.mouse.get_pos(), mouse_up)
         if start_action is not None:
-            return StartScreen.startScreen()
+            return StartScreen.StartScreen()
         quitElement.draw(screen)
         startElement.draw(screen)
         #screen.blit(background, (0, 0))
