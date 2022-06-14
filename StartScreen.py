@@ -23,7 +23,7 @@ def StartScreen():
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
-    titleElement = UIElement.UIElement(
+    titleElement = UIElement.UITextElement(
         center_position=(width*3 / 4, height* 5 / 6),
         font_size=int(fontsize*2/3),
         bg_rgb=None,

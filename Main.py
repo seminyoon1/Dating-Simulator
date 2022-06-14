@@ -22,11 +22,10 @@ def main():
     # Initialise screen
     pygame.init()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('Calc Gang Dating Simulator')
+    pygame.display.set_caption('Calc Gane Dating Simulator')
 
     # Fill background
     # background = pygame.Surface(screen.get_size())
-
 
     #Get Background image
     background = pygame.image.load('Assets\image.jpg')
@@ -48,7 +47,7 @@ def main():
     pygame.display.flip()
 
     # create ui elements
-    startElement = UIElement.UIElement(
+    startElement = UIElement.UITextElement(
         center_position=(width/6, height* 3 / 6),
         font_size=fontsize*2/3,
         bg_rgb=None,
@@ -57,7 +56,7 @@ def main():
         action= GameState.GameStates.START,
     )
 
-    quitElement = UIElement.UIElement(
+    quitElement = UIElement.UITextElement(
         center_position=(width/6, height* 4 / 6),
         font_size=fontsize*2/3,
         bg_rgb=None,

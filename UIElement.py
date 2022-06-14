@@ -14,7 +14,7 @@ def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
     return surface.convert_alpha()
 
 
-class UIElement(Sprite):
+class UITextElement(Sprite):
     """ An user interface element that can be added to a surface """
 
     def __init__(self, center_position, text, font_size, bg_rgb, text_rgb, action=None):
