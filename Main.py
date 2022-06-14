@@ -34,7 +34,6 @@ def main():
     # Display some text
     fontsize = 60
     font = pygame.font.Font(None, fontsize)
-    font2 = pygame.font.Font(None, int(fontsize*2/3))
     text1 = font.render("TOWER TRIALS", 1, (BLACK))
     #textpos = text.get_rect(center=(width/2, height/2))
     #textpos.centerx = background.get_rect().centerx
