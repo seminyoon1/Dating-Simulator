@@ -35,12 +35,10 @@ def main():
     fontsize = 60
     font = pygame.font.Font(None, fontsize)
     font2 = pygame.font.Font(None, int(fontsize*2/3))
-    text1 = font.render("CALC GANG", 1, (BLACK))
-    text2 = font2.render("DATING SIMULATOR", 1, (BLACK))
+    text1 = font.render("TOWER TRIALS", 1, (BLACK))
     #textpos = text.get_rect(center=(width/2, height/2))
     #textpos.centerx = background.get_rect().centerx
     background.blit(text1, (width/8, height/4))
-    background.blit(text2, (width/8, height/4 + fontsize))
 
     # Blit everything to the screen
     screen.blit(background, (0, 0))
