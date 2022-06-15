@@ -31,7 +31,7 @@ def StartScreen():
         font_size=int(fontsize*2/3),
         bg_rgb=None,
         text_rgb=WHITE,
-        text="Back to Title Screen",
+        text="Back",
         action=GameState.GameStates.TITLE,
     )
     gameElement = UIElement.UITextElement(
