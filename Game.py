@@ -78,4 +78,3 @@ def game():
         expElement.draw(screen)
         #screen.blit(background, (0, 0))
         pygame.display.flip()
-        

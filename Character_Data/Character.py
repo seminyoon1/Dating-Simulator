@@ -1,3 +1,4 @@
+import Character_Data.CharacterStats
 
 class Character():
 
@@ -19,6 +20,9 @@ class Character():
         self.experience = experience
         self.stats = stats
         self.statPoints = statPoints
+
+    #handling exp stat boosts for experience
+    expPoints = Character_Data.CharacterStats.expPoints
 
     #All things relating to self.level
     def getLevel(self):
@@ -67,5 +71,5 @@ class Character():
         return Character.levelUp(self)
     
     def newCharacter():
-        return Character(1,100,100,10,10,0,[10,10,10,10,10,10],0)
+        return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0)
 
