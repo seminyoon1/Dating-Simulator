@@ -40,14 +40,17 @@ class Character():
             self.maxHitpoints = self.maxHitpoints + 5
             self.statPoints = self.statPoints + 2
             for i in range(len(self.stats)):
-                self.stats[i] = self.stats[i] + 1
-
-    def getExperience(self):
-        return self.experience
+                self.stats[i] = self.stats[i] + 0.5
     
-    def expToNextLevel(self):
-        return int(self.level * self.level/2 * 100)
-
+    #All things related to self.hitpoints
+    def getHitpoints(self):
+        return self.hitpoints
+    
+    def updateHitpoints(self):
+        if self.hitpoints > self.maxHitpoints:
+            self.hitpoints = self.maxHitpoints
+    
+    #def poisioned or damage over time?
     
     def getHit(self, damage):
         #might need days here to run?
@@ -55,13 +58,28 @@ class Character():
             return Character.zeroHealth(self)
         self.hitpoints = self.hitpoints - damage
 
-
     def zeroHealth(self): # include days in the function params?
         #insert screen here to show death and reset
         self.experience = 0
         self.hitpoints = self.maxHitpoints
         self.energy = self.maxEnergy
         #add 3 days, need some import thingy
+    
+    def addHitpoints(self, num):
+        self.hitpoints = self.hitpoints + num
+        return Character.updateHitpoints(self)
+
+    #All things related to maxHitpoints
+    def getMaxHitpoints(self):
+        return self.maxHitpoints
+
+    #All things related to experience
+    def getExperience(self):
+        return self.experience
+    
+    def expToNextLevel(self):
+        return int(self.level * self.level/2 * 100)
+
     
     def addExperience(self):
         #idunno, 500 per thingy???

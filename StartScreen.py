@@ -40,7 +40,7 @@ def StartScreen():
         font_size=int(fontsize*2/3),
         bg_rgb=None,
         text_rgb=WHITE,
-        text="New Game",
+        text="Play Game", # should be new game later on
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
