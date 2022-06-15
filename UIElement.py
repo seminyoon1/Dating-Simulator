@@ -17,7 +17,7 @@ def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
 class UITextElement(Sprite):
     """ An user interface element that can be added to a surface """
 
-    def __init__(self, center_position, text, font_size, bg_rgb, text_rgb, action=None):
+    def __init__(self, center_position, text, font_size, bg_rgb, text_rgb, highlight_true, action=None):
         """
         Args:
             center_position - tuple (x, y)
@@ -34,9 +34,12 @@ class UITextElement(Sprite):
         )
 
         # create the image that shows when mouse is over the element
-        highlighted_image = create_surface_with_text(
-            text=text, font_size=font_size, text_rgb=(255,0,0), bg_rgb=bg_rgb
-        )
+        highlighted_image = default_image
+        if highlight_true == True:
+            highlighted_image = create_surface_with_text(
+                text=text, font_size=font_size, text_rgb=(255,0,0), bg_rgb=bg_rgb
+            )
+        
 
         # add both images and their rects to lists
         self.images = [default_image, highlighted_image]

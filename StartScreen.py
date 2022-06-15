@@ -32,6 +32,7 @@ def StartScreen():
         bg_rgb=None,
         text_rgb=WHITE,
         text="Back",
+        highlight_true = True,
         action=GameState.GameStates.TITLE,
     )
     gameElement = UIElement.UITextElement(
@@ -40,6 +41,7 @@ def StartScreen():
         bg_rgb=None,
         text_rgb=WHITE,
         text="New Game",
+        highlight_true = True,
         action=GameState.GameStates.GAME,
     )
 

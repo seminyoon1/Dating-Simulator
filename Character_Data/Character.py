@@ -20,16 +20,16 @@ class Character():
         self.stats = stats
         self.statPoints = statPoints
 
+    #All things relating to self.level
     def getLevel(self):
         return self.level
     
-    def expToNextLevel(self):
-        return int(self.level * self.level/2 * 100)
-
     def levelUp(self):
         while(self.experience >= Character.expToNextLevel(self) and self.level < 100):
             self.experience = self.experience - Character.expToNextLevel(self)
             self.level = self.level + 1
+            if(self.level > 99):
+                self.experience = 0
             self.energy = self.energy + 3
             self.maxEnergy = self.maxEnergy + 3
             self.hitpoints = self.hitpoints + 5
@@ -37,6 +37,13 @@ class Character():
             self.statPoints = self.statPoints + 2
             for i in range(len(self.stats)):
                 self.stats[i] = self.stats[i] + 1
+
+    def getExperience(self):
+        return self.experience
+    
+    def expToNextLevel(self):
+        return int(self.level * self.level/2 * 100)
+
     
     def getHit(self, damage):
         #might need days here to run?
@@ -52,9 +59,11 @@ class Character():
         self.energy = self.maxEnergy
         #add 3 days, need some import thingy
     
-    def getExperience(self):
+    def addExperience(self):
         #idunno, 500 per thingy???
-        self.experience = self.experience + 50
+        self.experience = self.experience + 5000 * self.level
+        if(self.level > 99):
+            self.experience = 0
         return Character.levelUp(self)
     
     def newCharacter():
