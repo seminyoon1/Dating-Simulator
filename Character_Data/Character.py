@@ -21,9 +21,6 @@ class Character():
         self.stats = stats
         self.statPoints = statPoints
 
-    #handling exp stat boosts for experience
-    expPoints = Character_Data.CharacterStats.expPoints
-
     #All things relating to self.level
     def getLevel(self):
         return self.level
@@ -73,14 +70,16 @@ class Character():
     def getMaxHitpoints(self):
         return self.maxHitpoints
 
+    def changeMaxHitPoints(self, num):
+        self.maxHitpoints = self.maxHitpoints + num
+
     #All things related to experience
     def getExperience(self):
         return self.experience
     
     def expToNextLevel(self):
-        return int(self.level * self.level/2 * 100)
+        return int(self.level * self.level/2 * 100 * (1 + Character_Data.CharacterStats.expPoints/100))
 
-    
     def addExperience(self):
         #idunno, 500 per thingy???
         self.experience = self.experience + 5000 * self.level

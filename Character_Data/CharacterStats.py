@@ -53,4 +53,3 @@ def addCritical(maxEnergy, stats):
         stats[4] = stats[4] + 0.2
         maxEnergy = maxEnergy + 0.4
         return maxEnergy, stats
-
