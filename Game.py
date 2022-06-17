@@ -16,6 +16,8 @@ user = Character.newCharacter()
 
 
 def game():
+    hit_sound = pygame.mixer.Sound('Assets/HitSound.mp3')
+
     width, height = pyautogui.size()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Calc Gang Dating Simulator')
@@ -117,6 +119,7 @@ def game():
             return game()
         if hit_action is not None:
             user.getHit(10)
+            pygame.mixer.Sound.play(hit_sound)
             return game()
         getExpElement.draw(screen)      
         titleElement.draw(screen)
