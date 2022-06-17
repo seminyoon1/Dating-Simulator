@@ -1,4 +1,7 @@
 import Character_Data.CharacterStats
+from Character_Data.Days import Days
+
+numOfDays = Days.newDays()
 
 class Character():
 
@@ -31,10 +34,10 @@ class Character():
             self.level = self.level + 1
             if(self.level > 99):
                 self.experience = 0
-            self.energy = self.energy + 3
-            self.maxEnergy = self.maxEnergy + 3
-            self.hitpoints = self.hitpoints + 5
-            self.maxHitpoints = self.maxHitpoints + 5
+            self.energy = self.energy + 2
+            self.maxEnergy = self.maxEnergy + 2
+            self.hitpoints = self.hitpoints + 10
+            self.maxHitpoints = self.maxHitpoints + 10
             self.statPoints = self.statPoints + 2
             for i in range(len(self.stats)):
                 self.stats[i] = self.stats[i] + 0.5
@@ -51,18 +54,18 @@ class Character():
     
     def getHit(self, damage):
         #might need days here to run?
-        if (self.hitpoints - damage) <= 0:
-            return Character.zeroHealth(self)
         self.hitpoints = self.hitpoints - damage
+        if self.hitpoints <= 0:
+            return Character.zeroHealth(self)
 
     def zeroHealth(self): # include days in the function params?
         #insert screen here to show death and reset
         self.experience = 0
         self.hitpoints = self.maxHitpoints
         self.energy = self.maxEnergy
-        #add 3 days, need some import thingy
+        numOfDays.addDays(3)
     
-    def addHitpoints(self, num):
+    def changeHitpoints(self, num):
         self.hitpoints = self.hitpoints + num
         return Character.updateHitpoints(self)
 
@@ -72,6 +75,9 @@ class Character():
 
     def changeMaxHitPoints(self, num):
         self.maxHitpoints = self.maxHitpoints + num
+    
+    #All things related to energy
+    #All things related to maxEnergy
 
     #All things related to experience
     def getExperience(self):
@@ -82,10 +88,17 @@ class Character():
 
     def addExperience(self):
         #idunno, 500 per thingy???
-        self.experience = self.experience + 5000 * self.level
+        self.experience = self.experience + 300 * self.level
         if(self.level > 99):
             self.experience = 0
         return Character.levelUp(self)
+    
+    #All things related to Days
+    def getDays(self):
+        return numOfDays.getDays()
+    
+    def addDays(self, num):
+        return numOfDays.addDays(num)
     
     def newCharacter():
         return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0)
