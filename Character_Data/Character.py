@@ -53,13 +53,11 @@ class Character():
     #def poisioned or damage over time?
     
     def getHit(self, damage):
-        #might need days here to run?
         self.hitpoints = self.hitpoints - damage
         if self.hitpoints <= 0:
             return Character.zeroHealth(self)
 
-    def zeroHealth(self): # include days in the function params?
-        #insert screen here to show death and reset
+    def zeroHealth(self):
         self.experience = 0
         self.hitpoints = self.maxHitpoints
         self.energy = self.maxEnergy
@@ -77,7 +75,18 @@ class Character():
         self.maxHitpoints = self.maxHitpoints + num
     
     #All things related to energy
+    def getEnergy(self):
+        return self.energy
+
+    def changeEnergy(self, num):
+        self.energy = self.energy + num
+
     #All things related to maxEnergy
+    def getMaxEnergy(self):
+        return self.maxEnergy
+        
+    def changeEnergy(self, num):
+        self.maxEnergy = self.maxEnergy + num
 
     #All things related to experience
     def getExperience(self):

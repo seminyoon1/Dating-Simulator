@@ -31,6 +31,9 @@ def main():
     background = pygame.image.load('Assets\image.jpg')
     background = pygame.transform.scale(background, (width, height))
 
+    pygame.mixer.music.load('Assets\AlexProductionsEpicCinematicTrailerElite.mp3')
+    pygame.mixer.music.play(-1)
+
     # Display some text
     fontsize = 60
     font = pygame.font.Font(None, fontsize)
