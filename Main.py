@@ -1,6 +1,6 @@
 #!/usr/bin/python
-import pyautogui
 import os
+import pyautogui
 import pygame
 from pygame.locals import *
 

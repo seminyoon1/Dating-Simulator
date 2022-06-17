@@ -34,13 +34,13 @@ def game():
     pygame.display.flip()
 
     titleElement = UIElement.UITextElement(
-        center_position=(width*3 / 4, height* 5 / 6),
-        font_size=int(fontsize*2/3),
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text="Back",
-        highlight_true = True,
-        action=GameState.GameStates.TITLE,
+            center_position=(width*3 / 4, height* 5 / 6),
+            font_size=int(fontsize*2/3),
+            bg_rgb=None,
+            text_rgb=WHITE,
+            text="Back",
+            highlight_true = True,
+            action=GameState.GameStates.TITLE,
     )
 
     gameElement = UIElement.UITextElement(
@@ -102,32 +102,116 @@ def game():
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
+    allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement]
+    for i in range(len(allElements)):
+            allElements[i].draw(screen)
 
     while 1:
         mouse_up = False
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 mouse_up = True
+        
         title_action = titleElement.update(pygame.mouse.get_pos(), mouse_up)
         getExp_action = getExpElement.update(pygame.mouse.get_pos(), mouse_up)
         hit_action = hitElement.update(pygame.mouse.get_pos(), mouse_up)
+
+        titleElement.draw(screen)
+        getExpElement.draw(screen)
+        hitElement.draw(screen)
+        
         if title_action is not None:
             return Main.main()
         if getExp_action is not None:
             user.addExperience()
             user.addDays(1/3)
-            return game()
+            screen.fill(BLACK)
+            pygame.display.flip()
+
+            gameElement = UIElement.UITextElement(
+                center_position=(width*1 / 6, height* 1 / 6),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Level: " + str(user.getLevel()),
+                highlight_true = False,
+                action=None,
+            )
+
+            expElement = UIElement.UITextElement(
+                center_position=(width*1 / 6, (height* 1 / 6) + gameTextSize),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Experience: " + str(user.getExperience()),
+                highlight_true = False,
+                action=None,
+            )
+            
+            healthElement = UIElement.UITextElement(
+                center_position=(width*1 / 6, (height* 1 / 6) + 2*gameTextSize),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Health: " + str(int(user.getHitpoints())) + " / " + str(int(user.getMaxHitpoints())),
+                highlight_true = False,
+                action=None,
+            )
+
+            daysElement = UIElement.UITextElement(
+                center_position=(width*9 / 10, height* 1 / 10),
+                font_size=gameTextSize*2,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Days: " + str(int(user.getDays())),
+                highlight_true = False,
+                action=None,
+            )
+
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement]
+            for i in range(len(allElements)):
+                allElements[i].draw(screen)
+    
         if hit_action is not None:
             user.getHit(10)
             pygame.mixer.Sound.play(hit_sound)
-            return game()
-        getExpElement.draw(screen)      
-        titleElement.draw(screen)
-        gameElement.draw(screen)
-        expElement.draw(screen)
-        daysElement.draw(screen)
-        healthElement.draw(screen)
-        hitElement.draw(screen)
+            screen.fill(BLACK)
+            pygame.display.flip()
+
+            expElement = UIElement.UITextElement(
+                center_position=(width*1 / 6, (height* 1 / 6) + gameTextSize),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Experience: " + str(user.getExperience()),
+                highlight_true = False,
+                action=None,
+            )
+            
+            healthElement = UIElement.UITextElement(
+                center_position=(width*1 / 6, (height* 1 / 6) + 2*gameTextSize),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Health: " + str(int(user.getHitpoints())) + " / " + str(int(user.getMaxHitpoints())),
+                highlight_true = False,
+                action=None,
+            )
+
+            daysElement = UIElement.UITextElement(
+                center_position=(width*9 / 10, height* 1 / 10),
+                font_size=gameTextSize*2,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Days: " + str(int(user.getDays())),
+                highlight_true = False,
+                action=None,
+            )
+
+
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement]
+            for i in range(len(allElements)):
+                allElements[i].draw(screen)
         
         #screen.blit(background, (0, 0))
         pygame.display.flip()
