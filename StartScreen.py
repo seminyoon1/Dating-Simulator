@@ -14,15 +14,9 @@ WHITE = (255, 255, 255)
 def StartScreen(): 
     width, height = pyautogui.size()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('Calc Gang Dating Simulator')
-
     background = pygame.Surface(screen.get_size())
 
-    #background = pygame.image.load('Assets\image.jpg')
-    #background = pygame.transform.scale(background, (width, height))
-
     fontsize = 60
-
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
@@ -58,6 +52,4 @@ def StartScreen():
             return Game.game()
         gameElement.draw(screen)
         titleElement.draw(screen)
-        #screen.blit(background, (0, 0))
         pygame.display.flip()
-    

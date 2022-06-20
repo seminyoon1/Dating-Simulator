@@ -1,4 +1,3 @@
-from numpy import power
 import pyautogui
 import pygame
 from pygame.locals import *
@@ -17,70 +16,10 @@ def run():
     screen = pygame.display.set_mode((width, height))
     background = pygame.Surface(screen.get_size())
 
-    # Display some text
     fontsize = 60
-
-    # Blit everything to the screen
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
-    # create ui elements
-    defenseElement = UIElement.UITextElement(
-        center_position=(width/6, height/ 8),
-        font_size=fontsize/2,
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text="Defense: " + str(user.getStats()[0]),
-        highlight_true = True,
-        action= GameState.GameStates.GAME,
-    )
-    evasivenessElement = UIElement.UITextElement(
-        center_position=(width/6, height*2/ 8),
-        font_size=fontsize/2,
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text="Evasiveness: " + str(user.getStats()[1]),
-        highlight_true = True,
-        action= GameState.GameStates.GAME,
-    )
-    intelligenceElement = UIElement.UITextElement(
-        center_position=(width/6, height*3/ 8),
-        font_size=fontsize/2,
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text="Intelligence: " + str(user.getStats()[2]),
-        highlight_true = True,
-        action= GameState.GameStates.GAME,
-    )
-    attackElement = UIElement.UITextElement(
-        center_position=(width/6, height*4/ 8),
-        font_size=fontsize/2,
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text="Attack: " + str(user.getStats()[3]),
-        highlight_true = True,
-        action= GameState.GameStates.GAME,
-    )
-    powerElement = UIElement.UITextElement(
-        center_position=(width/6, height*5/ 8),
-        font_size=fontsize/2,
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text="Power: " + str(user.getStats()[4]),
-        highlight_true = True,
-        action= GameState.GameStates.GAME,
-    )
-    criticalElement = UIElement.UITextElement(
-        center_position=(width/6, height*6/ 8),
-        font_size=fontsize/2,
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text="Critical: " + str(user.getStats()[5]),
-        highlight_true = True,
-        action= GameState.GameStates.GAME,
-    )
-
-    # Event loop
     while user.getStatPoints() > 0:
         mouse_up = False
 
@@ -125,7 +64,7 @@ def run():
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
-            text="Intelligence: " + str('%.1f'%(user.getStats()[4])),
+            text="Power: " + str('%.1f'%(user.getStats()[4])),
             highlight_true = True,
             action= GameState.GameStates.GAME,
         )
@@ -175,6 +114,7 @@ def run():
             user.changeStatPoints(-1)
 
         screen.fill(BLACK)
+        #use loop to make this more efficent
         defenseElement.draw(screen)
         evasivenessElement.draw(screen)
         intelligenceElement.draw(screen)

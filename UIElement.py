@@ -6,7 +6,6 @@ from pygame.rect import Rect
 BLUE = (106, 159, 181)
 WHITE = (255, 255, 255)
 
-
 def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
     """ Returns surface with text written on """
     font = pygame.freetype.SysFont("Courier", font_size, bold=True)
@@ -15,8 +14,6 @@ def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
 
 
 class UITextElement(Sprite):
-    """ An user interface element that can be added to a surface """
-
     def __init__(self, center_position, text, font_size, bg_rgb, text_rgb, highlight_true, action=None):
         """
         Args:
@@ -39,7 +36,6 @@ class UITextElement(Sprite):
             highlighted_image = create_surface_with_text(
                 text=text, font_size=font_size, text_rgb=(255,0,0), bg_rgb=bg_rgb
             )
-        
 
         # add both images and their rects to lists
         self.images = [default_image, highlighted_image]

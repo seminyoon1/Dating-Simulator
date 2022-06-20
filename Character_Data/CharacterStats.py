@@ -1,13 +1,3 @@
-""" 
-        stats:
-        defense = stats[0]
-        evasiveness = stats[1]
-        intelligence = stats[2]
-        attack = stats[3]
-        power = stats[4]
-        critical = stats[5]  
-        """
-
 #This is for a new game, base stats
 baseStats = [10, 10, 10, 10, 10, 10]
 
