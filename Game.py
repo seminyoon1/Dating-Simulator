@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 import Main
 from Character_Data.Character import Character
-import Character_Data.CharacterStats
+import StatsScreen
 
 import GameState
 import UIElement
@@ -125,6 +125,11 @@ def game():
         if getExp_action is not None:
             user.addExperience()
             user.addDays(1/3)
+            while(user.getStatPoints() > 0):
+                screen.fill(BLACK)
+                pygame.display.flip()
+                StatsScreen.run()
+
             screen.fill(BLACK)
             pygame.display.flip()
 

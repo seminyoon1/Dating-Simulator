@@ -85,7 +85,7 @@ class Character():
     def getMaxEnergy(self):
         return self.maxEnergy
         
-    def changeEnergy(self, num):
+    def changeMaxEnergy(self, num):
         self.maxEnergy = self.maxEnergy + num
 
     #All things related to experience
@@ -97,10 +97,21 @@ class Character():
 
     def addExperience(self):
         #idunno, 500 per thingy???
-        self.experience = self.experience + 300 * self.level
+        self.experience = int(self.experience + 50 * self.level * self.level/2)
         if(self.level > 99):
             self.experience = 0
         return Character.levelUp(self)
+
+    #All things related to stats
+    def getStats(self):
+        return self.stats
+
+    #All things related to Statpoints
+    def getStatPoints(self):
+        return self.statPoints
+
+    def changeStatPoints(self, num):
+        self.statPoints = self.statPoints + num
     
     #All things related to Days
     def getDays(self):
