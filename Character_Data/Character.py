@@ -5,7 +5,7 @@ numOfDays = Days.newDays()
 
 class Character():
 
-    def __init__(self, level, hitpoints, maxHitpoints, energy, maxEnergy, experience, stats, statPoints):
+    def __init__(self, level, hitpoints, maxHitpoints, energy, maxEnergy, experience, stats, statPoints, expPoints):
         """ 
         stats:
         defense = stats[0]
@@ -23,6 +23,7 @@ class Character():
         self.experience = experience
         self.stats = stats
         self.statPoints = statPoints
+        self.expPoints = expPoints
 
     #All things relating to self.level
     def getLevel(self):
@@ -93,7 +94,7 @@ class Character():
         return self.experience
     
     def expToNextLevel(self):
-        return int(self.level * self.level/2 * 100 * (1 + Character_Data.CharacterStats.expPoints/100))
+        return int(self.level * self.level/2 * 100 * (1 + self.expPoints/100))
 
     def addExperience(self):
         #idunno, 500 per thingy???
@@ -121,5 +122,5 @@ class Character():
         return numOfDays.addDays(num)
     
     def newCharacter():
-        return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0)
+        return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0,0)
 

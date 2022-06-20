@@ -10,7 +10,6 @@
 
 #This is for a new game, base stats
 baseStats = [10, 10, 10, 10, 10, 10]
-expPoints = 0
 
 def addDefense(maxHitpoints, maxEnergy, stats):
         stats[0] = stats[0] + 1
@@ -30,8 +29,8 @@ def addIntelligence(maxEnergy, expPoints, stats):
         stats[1] = stats[1] + 0.2
         stats[5] = stats[5] + 0.2
         maxEnergy = maxEnergy + 0.4
-        expPoints = expPoints + 1
-        return maxEnergy, stats
+        expPoints = expPoints + 2
+        return maxEnergy, expPoints, stats
 
 def addAttack(maxEnergy, stats):
         stats[3] = stats[3] + 1
