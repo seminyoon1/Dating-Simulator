@@ -4,9 +4,6 @@ import pyautogui
 import pygame
 from pygame.locals import *
 
-import numpy as np
-import cv2
-
 import GameState
 import UIElement
 import StartScreen

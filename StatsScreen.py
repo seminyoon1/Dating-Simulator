@@ -23,8 +23,17 @@ def run():
     while user.getStatPoints() > 0:
         mouse_up = False
 
-        defenseElement = UIElement.UITextElement(
+        textElement = UIElement.UITextElement(
             center_position=(width/6, height/ 8),
+            font_size=fontsize/2,
+            bg_rgb=None,
+            text_rgb=WHITE,
+            text="Select a skill:",
+            highlight_true = True,
+            action=None,
+        )
+        defenseElement = UIElement.UITextElement(
+            center_position=(width/6, height*2/ 8),
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
@@ -33,7 +42,7 @@ def run():
             action= GameState.GameStates.GAME,
         )
         evasivenessElement = UIElement.UITextElement(
-            center_position=(width/6, height*2/8),
+            center_position=(width/6, height*3/8),
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
@@ -42,7 +51,7 @@ def run():
             action= GameState.GameStates.GAME,
         )
         intelligenceElement = UIElement.UITextElement(
-            center_position=(width/6, height*3/ 8),
+            center_position=(width/6, height*4/ 8),
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
@@ -51,7 +60,7 @@ def run():
             action= GameState.GameStates.GAME,
         )
         attackElement = UIElement.UITextElement(
-            center_position=(width/6, height*4/ 8),
+            center_position=(width/6, height*5/ 8),
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
@@ -60,7 +69,7 @@ def run():
             action= GameState.GameStates.GAME,
         )
         powerElement = UIElement.UITextElement(
-            center_position=(width/6, height*5/ 8),
+            center_position=(width/6, height*6/ 8),
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
@@ -69,7 +78,7 @@ def run():
             action= GameState.GameStates.GAME,
         )
         criticalElement = UIElement.UITextElement(
-            center_position=(width/6, height*6/ 8),
+            center_position=(width/6, height*7/ 8),
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,

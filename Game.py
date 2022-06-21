@@ -89,7 +89,16 @@ def game():
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
-    allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement]
+    energyElement = UIElement.UITextElement(
+        center_position=(width*1 / 6, (height* 1 / 6) + 3*gameTextSize),
+        font_size=gameTextSize,
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Energy: " + str('%.1f'%(user.getEnergy())) + " / " + str('%.1f'%(user.getMaxEnergy())),
+        highlight_true = False,
+        action=None,
+    )
+    allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement]
     for i in range(len(allElements)):
             allElements[i].draw(screen)
 
@@ -133,7 +142,7 @@ def game():
                 font_size=gameTextSize,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Experience: " + str(user.getExperience()),
+                text= "Experience: " + str(user.getExperience()) + " / " + str(user.expToNextLevel()),
                 highlight_true = False,
                 action=None,
             )
@@ -155,7 +164,16 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement]
+            energyElement = UIElement.UITextElement(
+                center_position=(width*1 / 6, (height* 1 / 6) + 3*gameTextSize),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Energy: " + str('%.1f'%(user.getEnergy())) + " / " + str('%.1f'%(user.getMaxEnergy())),
+                highlight_true = False,
+                action=None,
+            )
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
     
@@ -170,7 +188,7 @@ def game():
                 font_size=gameTextSize,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Experience: " + str(user.getExperience()),
+                text= "Experience: " + str(user.getExperience()) + " / " + str(user.expToNextLevel()),
                 highlight_true = False,
                 action=None,
             )
@@ -192,7 +210,7 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
 
