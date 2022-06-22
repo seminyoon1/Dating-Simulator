@@ -11,7 +11,16 @@ import UIElement
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+
 user = Character.newCharacter()
+
+def newGame():
+    global user
+    user = Character.newCharacter()
+    game()
+    
+def savedGame():
+   game()
 
 def game():
     hit_sound = pygame.mixer.Sound('Assets/HitSound.mp3')
@@ -215,3 +224,4 @@ def game():
                 allElements[i].draw(screen)
 
         pygame.display.flip()
+

@@ -29,7 +29,7 @@ def run():
             bg_rgb=None,
             text_rgb=WHITE,
             text="Select a skill:",
-            highlight_true = True,
+            highlight_true = False,
             action=None,
         )
         defenseElement = UIElement.UITextElement(
@@ -130,4 +130,5 @@ def run():
         attackElement.draw(screen)
         powerElement.draw(screen)
         criticalElement.draw(screen)
+        textElement.draw(screen)
         pygame.display.flip()
