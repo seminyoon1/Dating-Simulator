@@ -3,7 +3,8 @@ import pygame
 from pygame.locals import *
 import Main
 from Character_Data.Character import Character
-import StatsScreen
+import Screen.StatsScreen as StatsScreen
+import Enemy_Data.Enemy as Enemy
 
 import GameState
 import UIElement
@@ -12,9 +13,11 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 user = Character.newCharacter()
+towerFloor = 1
 
 def newGame():
-    global user
+    global user, towerFloor
+    towerFloor = 1
     user = Character.newCharacter()
     game()
 
@@ -111,7 +114,16 @@ def game():
         highlight_true = False,
         action=None,
     )
-    allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement]
+    floorElement = UIElement.UITextElement(
+        center_position=(width*5 / 6, (height* 3 / 6)),
+        font_size=gameTextSize,
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Floor: " + str(towerFloor),
+        highlight_true = False,
+        action=None,
+    )
+    allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement, floorElement]
     for i in range(len(allElements)):
             allElements[i].draw(screen)
 
@@ -132,6 +144,8 @@ def game():
         if title_action is not None:
             return Main.main()
         if getExp_action is not None:
+            firstEnemy = Enemy.Enemy.getNewEnemy(towerFloor)
+            #return Enemy Screen
             user.addExperience()
             user.addDays(1/3)
             while(user.getStatPoints() > 0):
@@ -186,7 +200,16 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement]
+            floorElement = UIElement.UITextElement(
+                center_position=(width*5 / 6, (height* 3 / 6)),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Floor: " + str(towerFloor),
+                highlight_true = False,
+                action=None,
+            )
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement, floorElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
     
@@ -223,7 +246,7 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement, floorElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
 

@@ -6,7 +6,7 @@ from pygame.locals import *
 
 import GameState
 import UIElement
-import StartScreen
+import Screen.StartScreen as StartScreen
 
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
