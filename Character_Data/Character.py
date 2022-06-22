@@ -1,7 +1,9 @@
 import Character_Data.CharacterStats
 from Character_Data.Days import Days
+import random
 
 numOfDays = Days.newDays()
+
 
 class Character():
 
@@ -53,7 +55,14 @@ class Character():
     
     #def poisioned or damage over time?
     
-    def getHit(self, damage):
+    def getHit(self, damage): #certain floors, some aspect gets doubled for that floor
+        num = random.random() * 650
+        #defense
+        blockMultiplier = self.stats[0] / 650
+        damage = damage * (1 - blockMultiplier)
+        #evasiveness
+        if self.stats[1] >= num:
+            damage = 0
         self.hitpoints = self.hitpoints - damage
         if self.hitpoints <= 0:
             return Character.zeroHealth(self)

@@ -9,6 +9,7 @@ import GameState
 import UIElement
 
 WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 user = Character.newCharacter()
 
@@ -20,6 +21,7 @@ def newGame():
 def savedGame():
     gameFile = open('Character_Data/GameData.txt')
     gameDataText = gameFile.read()
+    print(gameDataText)
     #do something here to parse data
     gameFile.close()
     game()
