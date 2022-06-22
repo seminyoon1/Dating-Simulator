@@ -22,17 +22,17 @@ class Enemy():
     
     #def poisioned or damage over time?
     
-    def getHit(self, damage): #certain floors, some aspect gets doubled for that floor
-        num = random.random() * 650
+    def getHit(self, damage): 
+        num = random.random() * 1000
         #defense
-        blockMultiplier = self.stats[0] / 650
+        blockMultiplier = self.stats[0] / 1000
         damage = damage * (1 - blockMultiplier)
         #evasiveness
         if self.stats[1] >= num:
             damage = 0
         self.hitpoints = self.hitpoints - damage
-        #if self.hitpoints <= 0:
-        #    return Enemy.zeroHealth(self)
+        if self.hitpoints <= 0:
+            self.hitpoints = 0
 
     #All things related to maxHitpoints
     def getMaxHitpoints(self):

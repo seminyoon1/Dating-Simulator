@@ -63,8 +63,7 @@ class Character():
         if self.stats[1] >= num:
             damage = 0
         self.hitpoints = self.hitpoints - damage
-        if self.hitpoints <= 0:
-            return Character.zeroHealth(self)
+
 
     def zeroHealth(self):
         self.experience = 0

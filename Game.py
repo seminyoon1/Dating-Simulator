@@ -4,7 +4,7 @@ from pygame.locals import *
 import Main
 from Character_Data.Character import Character
 import Screen.StatsScreen as StatsScreen
-import Enemy_Data.Enemy as Enemy
+import Screen.EnemyScreen as EnemyScreen
 
 import GameState
 import UIElement
@@ -143,11 +143,13 @@ def game():
         
         if title_action is not None:
             return Main.main()
-        if getExp_action is not None:
-            firstEnemy = Enemy.Enemy.getNewEnemy(towerFloor)
-            #return Enemy Screen
-            user.addExperience()
-            user.addDays(1/3)
+        if getExp_action is not None: #NEED SEPARATE BOSS SCREEN
+            defeatedEnemy = EnemyScreen.run(towerFloor)
+            if defeatedEnemy == True:
+                user.addDays(1/3)
+                user.addExperience()
+            else: 
+                user.zeroHealth()
             while(user.getStatPoints() > 0):
                 screen.fill(BLACK)
                 pygame.display.flip()
