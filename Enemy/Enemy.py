@@ -51,5 +51,37 @@ class Enemy():
         damage = damage + (self.stats[5] / 5)
         return damage
 
-    #def newCharacter():
-    #    return Enemy(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0,0)
+    def getNewEnemy(floor):
+        #boss is 0% and 100%
+        #4 types: normal: 75%, critical: 10%, tank: 10%, elite: 5%
+        #need floor status - later
+        enemyType = random.random() * 100
+        hitpoints = 40 + floor*5 + int(random.random() * (10 + floor))
+        stats = []
+        for i in range(6):
+            stats.append(5 + floor/2 + round((random.random() * floor/10), 1))
+        if enemyType < 75:
+            name = "Normal"
+            return Enemy(hitpoints, hitpoints, stats), name
+        elif enemyType < 85:
+            for i in range(len(stats)):
+                stats[i] = round((stats[i] * 1.2) , 1)
+            name = "Powered"
+            return Enemy(hitpoints, hitpoints, stats), name
+        elif enemyType < 95:
+            hitpoints = int(hitpoints*1.5)
+            name = "Tank"
+            return Enemy(hitpoints, hitpoints, stats), name
+
+        hitpoints = int(hitpoints*1.25)
+        for i in range(len(stats)):
+            stats[i] = round((stats[i] * 1.25), 1)
+            name = "Elite"
+        return Enemy(hitpoints, hitpoints, stats), name
+
+    def getBoss(floor):
+        hitpoints = 80 + floor*10 + int(random.random() * (10 + floor*2))
+        stats = []
+        for i in range(6):
+            stats.append(5 + round(floor/(1.5) + (random.random() * floor/10), 1))
+        return Enemy(hitpoints, hitpoints, stats)

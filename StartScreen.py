@@ -6,16 +6,17 @@ import Game
 
 import GameState
 import UIElement
+import random
 
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)   
+WHITE = (255, 255, 255) 
 
 def StartScreen(): 
     width, height = pyautogui.size()
     screen = pygame.display.set_mode((width, height))
     background = pygame.Surface(screen.get_size())
-    
+
     fontsize = 60
     screen.blit(background, (0, 0))
     pygame.display.flip()

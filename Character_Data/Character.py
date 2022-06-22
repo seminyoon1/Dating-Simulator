@@ -4,7 +4,6 @@ import random
 
 numOfDays = Days.newDays()
 
-
 class Character():
 
     def __init__(self, level, hitpoints, maxHitpoints, energy, maxEnergy, experience, stats, statPoints, expPoints):
