@@ -146,5 +146,8 @@ class Character():
     def addDays(self, num):
         return numOfDays.addDays(num)
     
+    def newDays(self):
+        return Days.newDays()
+    
     def newCharacter():
         return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0,0)

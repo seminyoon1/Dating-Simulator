@@ -62,7 +62,7 @@ def run(towerFloor):
             font_size= fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
-            text= "Health: " + str(userHP) + " / " + str(int(user.getMaxHitpoints())),
+            text= "Health: " + str(int(userHP)) + " / " + str(int(user.getMaxHitpoints())),
             highlight_true = False,
             action=None,
         )
