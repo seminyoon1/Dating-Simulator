@@ -15,7 +15,7 @@ def StartScreen():
     width, height = pyautogui.size()
     screen = pygame.display.set_mode((width, height))
     background = pygame.Surface(screen.get_size())
-
+    
     fontsize = 60
     screen.blit(background, (0, 0))
     pygame.display.flip()

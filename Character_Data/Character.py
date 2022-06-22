@@ -115,6 +115,15 @@ class Character():
     #All things related to Stats
     def getStats(self):
         return self.stats
+    
+    def sendAttack(self):
+        num = random.random() * 289
+        damage = self.stats[3]
+        critMultiplier = 1.5 + (self.stats[5] / 260)
+        if(self.stats[4] >= num):
+            damage = damage * critMultiplier
+        damage = damage + (self.stats[5] / 5)
+        return damage
 
     #All things related to Statpoints
     def getStatPoints(self):
@@ -132,4 +141,3 @@ class Character():
     
     def newCharacter():
         return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0,0)
-
