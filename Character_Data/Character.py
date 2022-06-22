@@ -103,7 +103,7 @@ class Character():
             self.experience = 0
         return Character.levelUp(self)
 
-    #All things related to stats
+    #All things related to Stats
     def getStats(self):
         return self.stats
 
