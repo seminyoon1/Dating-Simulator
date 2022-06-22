@@ -19,6 +19,7 @@ def newGame():
     global user, towerFloor
     towerFloor = 1
     user = Character.newCharacter()
+    user.newDays()
     game()
 
 def savedGame():

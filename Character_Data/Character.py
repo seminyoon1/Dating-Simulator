@@ -1,3 +1,4 @@
+from ast import Num
 import Character_Data.CharacterStats
 from Character_Data.Days import Days
 import random
@@ -88,6 +89,14 @@ class Character():
 
     def changeEnergy(self, num):
         self.energy = self.energy + num
+    
+    def checkEnergy(self):
+        if self.energy <= 0:
+            self.energy = self.maxEnergy
+            damage = Character.getMaxHitpoints() / 2
+            Character.getHit(damage)
+            if self.hitpoints <= 0:
+                self.hitpoints = 1
 
     #All things related to maxEnergy
     def getMaxEnergy(self):

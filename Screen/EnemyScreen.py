@@ -54,6 +54,36 @@ def run(towerFloor):
             highlight_true = True,
             action= GameState.GameStates.GAME,
         )
+        userHP = user.getHitpoints()
+        if userHP <= 1 and userHP > 0:
+            userHP = 1
+        healthElement = UIElement.UITextElement(
+            center_position=(width*5 / 6, (height* 7 / 8) - fontsize/2 ),
+            font_size= fontsize/2,
+            bg_rgb=None,
+            text_rgb=WHITE,
+            text= "Health: " + str(userHP) + " / " + str(int(user.getMaxHitpoints())),
+            highlight_true = False,
+            action=None,
+        )
+        energyElement = UIElement.UITextElement(
+            center_position=(width*5 / 6, (height* 7 / 8)),
+            font_size=fontsize/2,
+            bg_rgb=None,
+            text_rgb=WHITE,
+            text= "Energy: " + str('%.1f'%(user.getEnergy())) + " / " + str('%.1f'%(user.getMaxEnergy())),
+            highlight_true = False,
+            action=None,
+        )
+        gameElement = UIElement.UITextElement(
+            center_position=(width*5 / 6, (height* 7 / 8) - fontsize),
+            font_size=fontsize/2,
+            bg_rgb=None,
+            text_rgb=WHITE,
+            text= "Level: " + str(user.getLevel()),
+            highlight_true = False,
+            action=None,
+        )
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -61,6 +91,8 @@ def run(towerFloor):
         hitEnemy_action = hitEnemyElement.update(pygame.mouse.get_pos(), mouse_up)
         if hitEnemy_action is not None:
             damage = user.sendAttack()
+            user.changeEnergy(-0.5)
+            user.checkEnergy()
             gameEnemy.getHit(damage)
             enemyDamage = gameEnemy.sendAttack()
             user.getHit(enemyDamage)
@@ -72,6 +104,9 @@ def run(towerFloor):
         nameElement.draw(screen)
         hitpointElement.draw(screen)
         hitEnemyElement.draw(screen)
+        healthElement.draw(screen)
+        energyElement.draw(screen)
+        gameElement.draw(screen)
         pygame.display.flip()
 
     return True
