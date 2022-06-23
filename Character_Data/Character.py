@@ -1,4 +1,3 @@
-from ast import Num
 import Character_Data.CharacterStats
 from Character_Data.Days import Days
 import random
@@ -147,7 +146,7 @@ class Character():
         return numOfDays.addDays(num)
     
     def newDays(self):
-        return Days.newDays()
+        return numOfDays.newDays()
     
     def newCharacter():
         return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0,0)
