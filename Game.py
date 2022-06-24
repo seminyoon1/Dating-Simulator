@@ -7,6 +7,7 @@ import Character_Data.CharacterStats as CharacterStats
 import Screen.StatsScreen as StatsScreen
 import Screen.EnemyScreen as EnemyScreen
 import Screen.BossScreen as BossScreen
+import Screen.EndScreen as EndScreen
 
 import GameState
 import UIElement
@@ -19,10 +20,10 @@ towerFloor = 1
 
 def newGame():
     global user, towerFloor
-    towerFloor = 1
+    towerFloor = 99 #Change to 1
     user = Character.newCharacter()
     user.newDays()
-    user.stats = [10, 10, 10, 10, 10, 10]
+    user.stats = [10, 10, 10, 100000, 10, 10] #Changed 
     game()
 
 def savedGame():
@@ -79,7 +80,7 @@ def game():
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
-        text= "Click for EXP",
+        text= "Fight Enemy",
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
@@ -133,7 +134,7 @@ def game():
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
-        text= "Click for Boss",
+        text= "Fight Boss",
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
@@ -141,7 +142,7 @@ def game():
     for i in range(len(allElements)):
             allElements[i].draw(screen)
 
-    while 1:
+    while towerFloor <= 100:
         mouse_up = False
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -238,10 +239,11 @@ def game():
                 towerFloor = towerFloor + 1
             else: 
                 user.zeroHealth()
-            while(user.getStatPoints() > 0):
-                screen.fill(BLACK)
-                pygame.display.flip()
-                StatsScreen.run()
+            if(towerFloor <= 100):
+                while(user.getStatPoints() > 0):
+                    screen.fill(BLACK)
+                    pygame.display.flip()
+                    StatsScreen.run()
             screen.fill(BLACK)
             pygame.display.flip()
 
@@ -341,3 +343,4 @@ def game():
                 allElements[i].draw(screen)
 
         pygame.display.flip()
+    return EndScreen.EndScreen()

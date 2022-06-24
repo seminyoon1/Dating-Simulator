@@ -21,7 +21,7 @@ def run(towerFloor):
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
-    while gameEnemy.getHitpoints() > 0:
+    while 1:
         mouse_up = False
 
         nameElement = UIElement.UITextElement(
@@ -94,6 +94,9 @@ def run(towerFloor):
             user.changeEnergy(-0.5)
             user.checkEnergy()
             gameEnemy.getHit(damage)
+            if(gameEnemy.getHitpoints() <= 0):
+                return True
+            pygame.time.wait(200)
             enemyDamage = gameEnemy.sendAttack()
             user.getHit(enemyDamage)
             if(user.getHitpoints() <= 0):
