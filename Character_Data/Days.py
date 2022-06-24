@@ -8,7 +8,7 @@ class Days():
     def getDays(self):
         return self.days
     
-    def setDays(self):
+    def resetDays(self):
         self.days = 0
 
     def newDays():

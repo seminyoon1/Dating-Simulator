@@ -121,7 +121,7 @@ class Character():
     #All things related to Stats
     def getStats(self):
         return self.stats
-    
+
     def sendAttack(self):
         num = random.random() * 289
         damage = self.stats[3]
@@ -146,7 +146,7 @@ class Character():
         return numOfDays.addDays(num)
     
     def newDays(self):
-        return numOfDays.newDays()
+        return numOfDays.resetDays()
     
     def newCharacter():
         return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0,0)

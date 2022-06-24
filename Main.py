@@ -60,7 +60,7 @@ def main():
         bg_rgb=None,
         text_rgb=BLACK,
         text="Quit",
-        zhighlight_true = True,
+        highlight_true = True,
         action=GameState.GameStates.QUIT,
     )
 

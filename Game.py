@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 import Main
 from Character_Data.Character import Character
+import Character_Data.CharacterStats as CharacterStats
 import Screen.StatsScreen as StatsScreen
 import Screen.EnemyScreen as EnemyScreen
 import Screen.BossScreen as BossScreen
@@ -21,6 +22,7 @@ def newGame():
     towerFloor = 1
     user = Character.newCharacter()
     user.newDays()
+    user.stats = [10, 10, 10, 10, 10, 10]
     game()
 
 def savedGame():
@@ -68,7 +70,7 @@ def game():
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
-        text= "Experience: " + str(user.getExperience()),
+        text= "Experience: " + str(user.getExperience()) + " / " + str(user.expToNextLevel()),
         highlight_true = False,
         action=None,
     )
@@ -135,7 +137,7 @@ def game():
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
-    allElements = [gameElement, getExpElement, daysElement, healthElement, energyElement, floorElement]
+    allElements = [gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement]
     for i in range(len(allElements)):
             allElements[i].draw(screen)
 
