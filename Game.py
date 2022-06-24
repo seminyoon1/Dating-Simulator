@@ -20,10 +20,10 @@ towerFloor = 1
 
 def newGame():
     global user, towerFloor
-    towerFloor = 99 #Change to 1
+    towerFloor = 1
     user = Character.newCharacter()
     user.newDays()
-    user.stats = [10, 10, 10, 100000, 10, 10] #Changed 
+    user.stats = [10, 10, 10, 10, 10, 10] 
     game()
 
 def savedGame():
