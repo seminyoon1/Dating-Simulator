@@ -69,7 +69,7 @@ class Character():
         self.experience = 0
         self.hitpoints = self.maxHitpoints
         self.energy = self.maxEnergy
-        numOfDays.addDays(3)
+        numOfDays.addDays(5, self.energy)
     
     def changeHitpoints(self, num):
         self.hitpoints = self.hitpoints + num
@@ -92,7 +92,7 @@ class Character():
     def checkEnergy(self):
         if self.energy <= 0:
             self.energy = self.maxEnergy
-            damage = Character.getMaxHitpoints() / 2
+            damage = Character.getMaxHitpoints(self) / 2
             Character.getHit(damage)
             if self.hitpoints <= 0:
                 self.hitpoints = 1
@@ -109,7 +109,7 @@ class Character():
         return self.experience
     
     def expToNextLevel(self):
-        return int(self.level * self.level/2 * 100 * (1 + self.expPoints/250))
+        return int(self.level * self.level/8 * (201-self.level) * (1 + self.expPoints/250))
 
     def addExperience(self, num):
         self.experience = int((self.experience + num) * (0.95 + self.stats[2] / 100))

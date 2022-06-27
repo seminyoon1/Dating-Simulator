@@ -17,9 +17,10 @@ BLACK = (0, 0, 0)
 
 user = Character.newCharacter()
 towerFloor = 1
+recordDays = ["---", "---", "---", "---", "---"]
 
 def newGame():
-    global user, towerFloor
+    global user, towerFloor, recordDays
     towerFloor = 1
     user = Character.newCharacter()
     user.newDays()
@@ -27,6 +28,8 @@ def newGame():
     game()
 
 def savedGame():
+    global user, towerFloor, recordDays
+    recordDays = [253, 257, 265, 279, 306]
     gameFile = open('Character_Data/GameData.txt')
     gameDataText = gameFile.read()
     print(gameDataText)
@@ -237,7 +240,6 @@ def game():
             defeatedEnemy = BossScreen.run(towerFloor)
             if defeatedEnemy == True:
                 user.addDays(1, user.getEnergy())
-                user.addExperience()
                 towerFloor = towerFloor + 1
             else: 
                 user.zeroHealth()

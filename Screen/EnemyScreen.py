@@ -95,7 +95,7 @@ def run(towerFloor):
             user.checkEnergy()
             gameEnemy.getHit(damage)
             if(gameEnemy.getHitpoints() <= 0):
-                user.addExperience(gameEnemy.sendExperience())
+                user.addExperience(gameEnemy.sendExperience() * (0.9 + towerFloor/10))
                 return True
             pygame.time.wait(200)
             enemyDamage = gameEnemy.sendAttack()

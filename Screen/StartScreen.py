@@ -3,10 +3,10 @@ import pygame
 from pygame.locals import *
 import Main
 import Game
+import Screen.RecordScreen as RecordScreen
 
 import GameState
 import UIElement
-import random
 
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
@@ -48,6 +48,16 @@ def StartScreen():
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
+    recordElement = UIElement.UITextElement(
+        center_position=(width*1 / 2, height* 1 / 6),
+        font_size=int(fontsize*2/3),
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text="View Record",
+        highlight_true = True,
+        action=GameState.GameStates.GAME,
+    )
+
 
     while 1:
         mouse_up = False
@@ -57,12 +67,16 @@ def StartScreen():
         title_action = titleElement.update(pygame.mouse.get_pos(), mouse_up)
         game_action = newGameElement.update(pygame.mouse.get_pos(), mouse_up)
         savedGame_action = loadGameElement.update(pygame.mouse.get_pos(), mouse_up)
+        record_action = recordElement.update(pygame.mouse.get_pos(), mouse_up)
         if title_action is not None:
             return Main.main()
         if game_action is not None:
             return Game.newGame()
         if savedGame_action is not None:
             return Game.savedGame()
+        if record_action is not None:
+            return RecordScreen.recordScreen()
+        recordElement.draw(screen)
         newGameElement.draw(screen)
         titleElement.draw(screen)
 

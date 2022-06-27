@@ -6,3 +6,4 @@ class GameStates(Enum):
     QUIT = -1
     GAME = 2
     ENEMY = 3
+    RECORD = 4
