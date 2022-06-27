@@ -109,11 +109,10 @@ class Character():
         return self.experience
     
     def expToNextLevel(self):
-        return int(self.level * self.level/2 * 100 * (1 + self.expPoints/100))
+        return int(self.level * self.level/2 * 100 * (1 + self.expPoints/250))
 
-    def addExperience(self):
-        #idunno, 500 per thingy???
-        self.experience = int(self.experience + 50 * self.level * self.level/2)
+    def addExperience(self, num):
+        self.experience = int((self.experience + num) * (0.95 + self.stats[2] / 100))
         if(self.level > 99):
             self.experience = 0
         return Character.levelUp(self)
@@ -142,8 +141,8 @@ class Character():
     def getDays(self):
         return numOfDays.getDays()
     
-    def addDays(self, num):
-        return numOfDays.addDays(num)
+    def addDays(self, num, energy):
+        return numOfDays.addDays(num, energy)
     
     def newDays(self):
         return numOfDays.resetDays()

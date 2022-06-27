@@ -2,8 +2,8 @@ class Days():
     def __init__(self, days):
         self.days = days
     
-    def addDays(self, num):
-        self.days = self.days + num
+    def addDays(self, num, energy):
+        self.days = self.days + (num * (200 - energy) / 200)
     
     def getDays(self):
         return self.days

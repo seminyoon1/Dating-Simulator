@@ -158,13 +158,15 @@ def game():
         hitElement.draw(screen)
         getBossElement.draw(screen)
         
+        #find use of energy that doesn't affect stats, is needed throughout bosses and affects all floors
+        #AFFECT DAYS!
+
         if title_action is not None:
             return Main.main()
         if getExp_action is not None: #NEED SEPARATE BOSS SCREEN
             defeatedEnemy = EnemyScreen.run(towerFloor)
             if defeatedEnemy == True:
-                user.addDays(1/3)
-                user.addExperience()
+                user.addDays(1/3, user.getEnergy())
             else: 
                 user.zeroHealth()
             while(user.getStatPoints() > 0):
@@ -175,7 +177,7 @@ def game():
             pygame.display.flip()
 
             gameElement = UIElement.UITextElement(
-                center_position=(width*1 / 6, height* 1 / 6),
+                center_position=(width*1 / 6, height*1 / 6),
                 font_size=gameTextSize,
                 bg_rgb=None,
                 text_rgb=WHITE,
@@ -234,7 +236,7 @@ def game():
         if boss_action is not None:
             defeatedEnemy = BossScreen.run(towerFloor)
             if defeatedEnemy == True:
-                user.addDays(1)
+                user.addDays(1, user.getEnergy())
                 user.addExperience()
                 towerFloor = towerFloor + 1
             else: 
