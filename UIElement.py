@@ -68,5 +68,4 @@ class UITextElement(Sprite):
             self.mouse_over = False
 
     def draw(self, surface):
-        """ Draws element onto a surface """
         surface.blit(self.image, self.rect)

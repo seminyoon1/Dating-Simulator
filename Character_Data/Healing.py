@@ -2,6 +2,9 @@ class Healing():
 
     def __init__(self, heal):
         self.heal = heal
+    
+    def addHeal(self, num):
+        self.heal = self.heal + int(num /3)
 
     def getHeal(self):
         return self.heal

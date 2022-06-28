@@ -8,6 +8,7 @@ import Screen.StatsScreen as StatsScreen
 import Screen.EnemyScreen as EnemyScreen
 import Screen.BossScreen as BossScreen
 import Screen.EndScreen as EndScreen
+import Character_Data.Healing as Healing
 
 import GameState
 import UIElement
@@ -18,17 +19,19 @@ BLACK = (0, 0, 0)
 user = Character.newCharacter()
 towerFloor = 1
 recordDays = ["---", "---", "---", "---", "---"]
+heal = Healing.Healing.newHeal()
 
 def newGame():
-    global user, towerFloor, recordDays
+    global user, towerFloor, recordDays, heal
     towerFloor = 1
     user = Character.newCharacter()
     user.newDays()
     user.stats = [10, 10, 10, 10, 10, 10] 
+    heal = Healing.Healing.newHeal()
     game()
 
 def savedGame():
-    global user, towerFloor, recordDays
+    global user, towerFloor, recordDays, heal
     recordDays = [253, 257, 265, 279, 306]
     gameFile = open('Character_Data/GameData.txt')
     gameDataText = gameFile.read()
@@ -132,7 +135,25 @@ def game():
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
-    allElements = [gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement]
+    healElement = UIElement.UITextElement(
+        center_position=(width*3 / 6, height* 3 / 6),
+        font_size=gameTextSize,
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Lifedrain: " + str(int(heal.getHeal())),
+        highlight_true = False,
+        action=GameState.GameStates.GAME,
+    )
+    healingElement = UIElement.UITextElement(
+        center_position=(width*4 / 6, height* 3 / 6),
+        font_size=gameTextSize,
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Heal",
+        highlight_true = True,
+        action=GameState.GameStates.GAME,
+    )
+    allElements = [gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, healElement]
     for i in range(len(allElements)):
             allElements[i].draw(screen)
 
@@ -145,10 +166,12 @@ def game():
         title_action = titleElement.update(pygame.mouse.get_pos(), mouse_up)
         getExp_action = getExpElement.update(pygame.mouse.get_pos(), mouse_up)
         boss_action = getBossElement.update(pygame.mouse.get_pos(), mouse_up)
+        healing_action = healingElement.update(pygame.mouse.get_pos(), mouse_up)
 
         titleElement.draw(screen)
         getExpElement.draw(screen)
         getBossElement.draw(screen)
+        healingElement.draw(screen)
         
         #find use of energy that doesn't affect stats, is needed throughout bosses and affects all floors
         #AFFECT DAYS!
@@ -222,9 +245,28 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement]
+            healElement = UIElement.UITextElement(
+                center_position=(width*3 / 6, height* 3 / 6),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Lifedrain: " + str(int(heal.getHeal())),
+                highlight_true = False,
+                action=GameState.GameStates.GAME,
+            )
+            healingElement = UIElement.UITextElement(
+                center_position=(width*4 / 6, height* 3 / 6),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Heal",
+                highlight_true = True,
+                action=GameState.GameStates.GAME,
+            )
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, healingElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
+
         if boss_action is not None:
             defeatedEnemy = BossScreen.run(towerFloor)
             if defeatedEnemy == True:
@@ -294,9 +336,46 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement]
+            healElement = UIElement.UITextElement(
+                center_position=(width*3 / 6, height* 3 / 6),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Lifedrain: " + str(int(heal.getHeal())),
+                highlight_true = False,
+                action=GameState.GameStates.GAME,
+            )
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
-                
+        
+        if healing_action is not None:
+            user.hitpoints = heal.autoHeal(user.hitpoints, user.maxHitpoints, 100)
+            screen.fill(BLACK)
+            pygame.display.flip()
+
+            healElement = UIElement.UITextElement(
+                center_position=(width*3 / 6, height* 3 / 6),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Lifedrain: " + str(int(heal.getHeal())),
+                highlight_true = False,
+                action=GameState.GameStates.GAME,
+            )
+            healthElement = UIElement.UITextElement(
+                center_position=(width*1 / 6, (height* 1 / 6) + 2*gameTextSize),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Health: " + str(int(user.getHitpoints())) + " / " + str(int(user.getMaxHitpoints())),
+                highlight_true = False,
+                action=None,
+            )
+
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement]
+            for i in range(len(allElements)):
+                allElements[i].draw(screen)
+
         pygame.display.flip()
     return EndScreen.EndScreen()

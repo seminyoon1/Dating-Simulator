@@ -6,13 +6,16 @@ import UIElement
 import Game
 import GameState
 import Enemy_Data.Enemy as Enemy
+import Character_Data.Healing as Healing
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 def run(towerFloor):
+    heal = Game.heal
     user = Game.user
     gameEnemy, enemyName = Enemy.Enemy.getNewEnemy(towerFloor)
+    maxHealth = gameEnemy.getHitpoints()
     width, height = pyautogui.size()
     screen = pygame.display.set_mode((width, height))
     background = pygame.Surface(screen.get_size())
@@ -96,6 +99,7 @@ def run(towerFloor):
             gameEnemy.getHit(damage)
             if(gameEnemy.getHitpoints() <= 0):
                 user.addExperience(gameEnemy.sendExperience() * (0.9 + towerFloor/10))
+                heal.addHeal(maxHealth)
                 return True
             pygame.time.wait(200)
             enemyDamage = gameEnemy.sendAttack()
@@ -104,7 +108,6 @@ def run(towerFloor):
                 return False
 
         screen.fill(BLACK)
-        #use loop to make this more efficent
 
         allElements = [nameElement, hitpointElement, hitEnemyElement, healthElement, energyElement, gameElement]
         for i in range(len(allElements)):
