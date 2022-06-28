@@ -105,12 +105,11 @@ def run(towerFloor):
 
         screen.fill(BLACK)
         #use loop to make this more efficent
-        nameElement.draw(screen)
-        hitpointElement.draw(screen)
-        hitEnemyElement.draw(screen)
-        healthElement.draw(screen)
-        energyElement.draw(screen)
-        gameElement.draw(screen)
+
+        allElements = [nameElement, hitpointElement, hitEnemyElement, healthElement, energyElement, gameElement]
+        for i in range(len(allElements)):
+                allElements[i].draw(screen)
+                
         pygame.display.flip()
 
     return True
