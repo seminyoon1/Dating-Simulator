@@ -105,15 +105,6 @@ def game():
         highlight_true = False,
         action=None,
     )
-    hitElement = UIElement.UITextElement(
-        center_position=(width*3 / 6, height* 5 / 6),
-        font_size=gameTextSize,
-        bg_rgb=None,
-        text_rgb=WHITE,
-        text= "Click to get Hit",
-        highlight_true = True,
-        action=GameState.GameStates.GAME,
-    )
     energyElement = UIElement.UITextElement(
         center_position=(width*1 / 6, (height* 1 / 6) + 3*gameTextSize),
         font_size=gameTextSize,
@@ -133,7 +124,7 @@ def game():
         action=None,
     )
     getBossElement = UIElement.UITextElement(
-        center_position=(width*1 / 6, (height* 5 / 6) - gameTextSize),
+        center_position=(width*3 / 6, height* 5 / 6),
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
@@ -153,12 +144,10 @@ def game():
         
         title_action = titleElement.update(pygame.mouse.get_pos(), mouse_up)
         getExp_action = getExpElement.update(pygame.mouse.get_pos(), mouse_up)
-        hit_action = hitElement.update(pygame.mouse.get_pos(), mouse_up)
         boss_action = getBossElement.update(pygame.mouse.get_pos(), mouse_up)
 
         titleElement.draw(screen)
         getExpElement.draw(screen)
-        hitElement.draw(screen)
         getBossElement.draw(screen)
         
         #find use of energy that doesn't affect stats, is needed throughout bosses and affects all floors
@@ -233,7 +222,7 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement, floorElement, getBossElement]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
         if boss_action is not None:
@@ -305,46 +294,9 @@ def game():
                 highlight_true = False,
                 action=None,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement, floorElement, getBossElement]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
-
-        if hit_action is not None:
-            user.getHit(10)
-            pygame.mixer.Sound.play(hit_sound)
-            screen.fill(BLACK)
-            pygame.display.flip()
-
-            expElement = UIElement.UITextElement(
-                center_position=(width*1 / 6, (height* 1 / 6) + gameTextSize),
-                font_size=gameTextSize,
-                bg_rgb=None,
-                text_rgb=WHITE,
-                text= "Experience: " + str(user.getExperience()) + " / " + str(user.expToNextLevel()),
-                highlight_true = False,
-                action=None,
-            )
-            healthElement = UIElement.UITextElement(
-                center_position=(width*1 / 6, (height* 1 / 6) + 2*gameTextSize),
-                font_size=gameTextSize,
-                bg_rgb=None,
-                text_rgb=WHITE,
-                text= "Health: " + str(int(user.getHitpoints())) + " / " + str(int(user.getMaxHitpoints())),
-                highlight_true = False,
-                action=None,
-            )
-            daysElement = UIElement.UITextElement(
-                center_position=(width*9 / 10, height* 1 / 10),
-                font_size=gameTextSize*2,
-                bg_rgb=None,
-                text_rgb=WHITE,
-                text= "Days: " + str(int(user.getDays())),
-                highlight_true = False,
-                action=None,
-            )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, hitElement, energyElement, floorElement, getBossElement]
-            for i in range(len(allElements)):
-                allElements[i].draw(screen)
-
+                
         pygame.display.flip()
     return EndScreen.EndScreen()
