@@ -6,7 +6,6 @@ import Game
 
 import GameState
 import UIElement
-import random
 
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
@@ -35,10 +34,23 @@ def EndScreen():
         font_size=int(fontsize*2/3),
         bg_rgb=None,
         text_rgb=WHITE,
-        text="You finished all 100 floors in " + str(Game.user.getDays()) + " Days",
+        text="You finished all 100 floors in " + str(round(Game.user.getDays() , 2)) + " Days",
         highlight_true = False,
         action=GameState.GameStates.GAME,
     )
+
+    for i in range(5):
+        if Game.recordDays[i] == "---":
+            Game.recordDays[i] = round(Game.user.getDays(), 2)
+            break
+        elif Game.recordDays[i] >= round(Game.user.getDays(), 2):
+            tempFirstData = Game.recordDays[i]
+            Game.recordDays[i] = round(Game.user.getDays(), 2)
+            for i in range(i,4):
+                tempSecondData = Game.recordDays[i+1]
+                Game.recordDays[i+1] = tempFirstData
+                tempFirstData = tempSecondData
+            break
 
     while 1:
         mouse_up = False
