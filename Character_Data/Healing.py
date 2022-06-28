@@ -4,7 +4,7 @@ class Healing():
         self.heal = heal
     
     def addHeal(self, num):
-        self.heal = self.heal + int(num /3)
+        self.heal = self.heal + int(num /2.2)
 
     def getHeal(self):
         return self.heal

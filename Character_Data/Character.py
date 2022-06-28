@@ -92,9 +92,10 @@ class Character():
     def checkEnergy(self):
         if self.energy <= 0:
             self.energy = self.maxEnergy
-            damage = Character.getMaxHitpoints(self) / 2
-            Character.getHit(damage)
+            damage = self.maxHitpoints / 2
+            self.hitpoints = self.hitpoints - damage
             if self.hitpoints <= 0:
+                numOfDays.addDays(1, 0)
                 self.hitpoints = 1
 
     #All things related to maxEnergy
