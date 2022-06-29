@@ -7,3 +7,4 @@ class GameStates(Enum):
     GAME = 2
     ENEMY = 3
     RECORD = 4
+    SETTINGS = 5

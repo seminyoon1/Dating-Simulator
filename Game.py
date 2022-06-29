@@ -8,6 +8,7 @@ import Screen.StatsScreen as StatsScreen
 import Screen.EnemyScreen as EnemyScreen
 import Screen.BossScreen as BossScreen
 import Screen.EndScreen as EndScreen
+import Screen.SettingsScreen as SettingsScreen
 import Character_Data.Healing as Healing
 
 import GameState
@@ -50,6 +51,18 @@ def game():
     background = pygame.image.load('Assets\Floor.jpg')
     background = pygame.transform.scale(background, (width*3/4, height*3/4))
     gameTextSize = int(fontsize*1/3)
+
+    heartImage = pygame.image.load('Assets\GameImages\RedHeart.png')
+    heartImage = pygame.transform.scale(heartImage, (60, 60))
+    heart_center = ((width*5/6 - heartImage.get_width() / 2), (height*5/6 - 40 - heartImage.get_height() / 2))
+
+    enemyImage = pygame.image.load('Assets\GameImages\enemy.png')
+    enemyImage = pygame.transform.scale(enemyImage, (60, 60))
+    enemy_center = ((width*1/6 - enemyImage.get_width() / 2), (height*5/6 - 40 - enemyImage.get_height() / 2))
+
+    bossImage = pygame.image.load('Assets\GameImages\Boss.jpg')
+    bossImage = pygame.transform.scale(bossImage, (60, 60))
+    boss_center = ((width*3/6 - bossImage.get_width() / 2), (height*5/6 - 40 - bossImage.get_height() / 2))
 
     screen.blit(background, (width/8, height/8))
     pygame.display.flip()
@@ -153,6 +166,16 @@ def game():
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
+    settings = UIElement.UITextElement(
+        center_position=(width*11 / 12, height* 11 / 12),
+        font_size=int(fontsize*2/3),
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Settings",
+        highlight_true = True,
+        action=GameState.GameStates.SETTINGS,
+    )
+
     allElements = [gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, healElement]
     for i in range(len(allElements)):
             allElements[i].draw(screen)
@@ -167,14 +190,17 @@ def game():
         getExp_action = getExpElement.update(pygame.mouse.get_pos(), mouse_up)
         boss_action = getBossElement.update(pygame.mouse.get_pos(), mouse_up)
         healing_action = healingElement.update(pygame.mouse.get_pos(), mouse_up)
+        settings_action = settings.update(pygame.mouse.get_pos(), mouse_up)
 
         titleElement.draw(screen)
         getExpElement.draw(screen)
         getBossElement.draw(screen)
         healingElement.draw(screen)
-        
-        #find use of energy that doesn't affect stats, is needed throughout bosses and affects all floors
-        #AFFECT DAYS!
+        settings.draw(screen)
+
+        screen.blit(heartImage, heart_center)
+        screen.blit(enemyImage, enemy_center)
+        screen.blit(bossImage, boss_center)
 
         if title_action is not None:
             return Main.main()
@@ -191,11 +217,8 @@ def game():
             screen.fill(BLACK)
             pygame.display.flip()
 
-            background = pygame.image.load('Assets\Floor.jpg')
-            background = pygame.transform.scale(background, (width*3/4, height*3/4))
             screen.blit(background, (width/8, height/8))
         
-
             gameElement = UIElement.UITextElement(
                 center_position=(width*1 / 10, height* 1 / 10),
                 font_size=gameTextSize,
@@ -268,7 +291,7 @@ def game():
                 highlight_true = True,
                 action=GameState.GameStates.GAME,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, healingElement]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, healingElement, settings]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
 
@@ -277,6 +300,7 @@ def game():
             if defeatedEnemy == True:
                 user.addDays(1, user.getEnergy())
                 towerFloor = towerFloor + 1
+                user.energy = user.getMaxEnergy()
             else: 
                 user.zeroHealth()
             if(towerFloor <= 100):
@@ -287,10 +311,7 @@ def game():
             screen.fill(BLACK)
             pygame.display.flip()
 
-            background = pygame.image.load('Assets\Floor.jpg')
-            background = pygame.transform.scale(background, (width*3/4, height*3/4))
             screen.blit(background, (width/8, height/8))
-        
 
             gameElement = UIElement.UITextElement(
                 center_position=(width*1 / 10, height* 1 / 10),
@@ -355,7 +376,7 @@ def game():
                 highlight_true = False,
                 action=GameState.GameStates.GAME,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
         
@@ -364,10 +385,7 @@ def game():
             screen.fill(BLACK)
             pygame.display.flip()
 
-            background = pygame.image.load('Assets\Floor.jpg')
-            background = pygame.transform.scale(background, (width*3/4, height*3/4))
-            screen.blit(background, (width/8, height/8))
-        
+            screen.blit(background, (width/8, height/8))   
 
             healElement = UIElement.UITextElement(
                 center_position=(width*1 / 10, (height* 1 / 10) + 4*gameTextSize),
@@ -388,9 +406,22 @@ def game():
                 action=None,
             )
 
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
+        if settings_action is not None:
+            screen.fill(BLACK)
+            pygame.display.flip()
+            SettingsScreen.run()
+            screen.fill(BLACK)
+            pygame.display.flip()
+
+            screen.blit(background, (width/8, height/8))
+
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings]
+            for i in range(len(allElements)):
+                allElements[i].draw(screen)
+
 
         pygame.display.flip()
     return EndScreen.EndScreen()
