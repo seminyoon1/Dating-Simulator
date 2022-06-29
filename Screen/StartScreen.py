@@ -17,12 +17,15 @@ def StartScreen():
     screen = pygame.display.set_mode((width, height))
     background = pygame.Surface(screen.get_size())
 
+    background = pygame.image.load('Assets\TowerBackground.jpg')
+    background = pygame.transform.scale(background, (width, height))
+
     fontsize = 60
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
     titleElement = UIElement.UITextElement(
-        center_position=(width*3 / 4, height* 5 / 6),
+        center_position=(width*1 / 6, height* 4 / 5),
         font_size=int(fontsize*2/3),
         bg_rgb=None,
         text_rgb=WHITE,
@@ -31,7 +34,7 @@ def StartScreen():
         action=GameState.GameStates.TITLE,
     )
     newGameElement = UIElement.UITextElement(
-        center_position=(width*1 / 4, height* 5 / 6),
+        center_position=(width*1 / 6, height* 1 / 5),
         font_size=int(fontsize*2/3),
         bg_rgb=None,
         text_rgb=WHITE,
@@ -40,7 +43,7 @@ def StartScreen():
         action=GameState.GameStates.GAME,
     )
     loadGameElement = UIElement.UITextElement(
-        center_position=(width*1 / 2, height* 5 / 6),
+        center_position=(width*1 / 6, height* 2 / 5),
         font_size=int(fontsize*2/3),
         bg_rgb=None,
         text_rgb=WHITE,
@@ -49,7 +52,7 @@ def StartScreen():
         action=GameState.GameStates.GAME,
     )
     recordElement = UIElement.UITextElement(
-        center_position=(width*1 / 2, height* 1 / 6),
+        center_position=(width*1 / 6, height* 3 / 5),
         font_size=int(fontsize*2/3),
         bg_rgb=None,
         text_rgb=WHITE,

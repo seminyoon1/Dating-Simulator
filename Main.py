@@ -1,4 +1,3 @@
-import os
 import pyautogui
 import pygame
 from pygame.locals import *
@@ -10,6 +9,7 @@ import Screen.StartScreen as StartScreen
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+TITLE = (178, 34, 34)
 
 def main():
     # Get Screensize
@@ -24,7 +24,7 @@ def main():
     # background = pygame.Surface(screen.get_size())
 
     #Get Background image
-    background = pygame.image.load('Assets\image.jpg')
+    background = pygame.image.load('Assets\TowerBackground.jpg')
     background = pygame.transform.scale(background, (width, height))
 
     pygame.mixer.music.load('Assets\AlexProductionsEpicCinematicTrailerElite.mp3')
@@ -32,8 +32,8 @@ def main():
 
     # Display some text
     fontsize = 60
-    font = pygame.font.Font(None, fontsize)
-    text1 = font.render("TOWER TRIALS", 1, (BLACK))
+    titleFont = pygame.font.Font('Assets\Fonts\ChrustyRock.ttf', fontsize)
+    text1 = titleFont.render("TOWER TRIALS", 1, (TITLE))
     #textpos = text.get_rect(center=(width/2, height/2))
     #textpos.centerx = background.get_rect().centerx
     background.blit(text1, (width/8, height/4))
@@ -47,7 +47,7 @@ def main():
         center_position=(width/6, height* 3 / 6),
         font_size=fontsize*2/3,
         bg_rgb=None,
-        text_rgb=BLACK,
+        text_rgb=WHITE,
         text="Start",
         highlight_true = True,
         action= GameState.GameStates.START,
@@ -57,7 +57,7 @@ def main():
         center_position=(width/6, height* 4 / 6),
         font_size=fontsize*2/3,
         bg_rgb=None,
-        text_rgb=BLACK,
+        text_rgb=WHITE,
         text="Quit",
         highlight_true = True,
         action=GameState.GameStates.QUIT,

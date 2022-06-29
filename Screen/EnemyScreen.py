@@ -14,6 +14,7 @@ BLACK = (0, 0, 0)
 def run(towerFloor):
     heal = Game.heal
     user = Game.user
+    towerFloor = Game.towerFloor
     gameEnemy, enemyName = Enemy.Enemy.getNewEnemy(towerFloor)
     maxHealth = gameEnemy.getHitpoints()
     width, height = pyautogui.size()
@@ -99,7 +100,7 @@ def run(towerFloor):
             gameEnemy.getHit(damage)
             if(gameEnemy.getHitpoints() <= 0):
                 user.addExperience(gameEnemy.sendExperience() * (0.9 + towerFloor/10))
-                heal.addHeal(maxHealth)
+                heal.addHeal(maxHealth, towerFloor)
                 return True
             pygame.time.wait(200)
             enemyDamage = gameEnemy.sendAttack()

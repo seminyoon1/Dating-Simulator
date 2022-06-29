@@ -3,8 +3,17 @@ class Healing():
     def __init__(self, heal):
         self.heal = heal
     
-    def addHeal(self, num):
-        self.heal = self.heal + int(num /2.2)
+    def addHeal(self, num, towerFloor):
+        if(towerFloor < 50):
+            self.heal = self.heal + int(num /3)
+        elif(towerFloor < 75):
+            self.heal = self.heal + int(num /4)
+        elif(towerFloor < 90):
+            self.heal = self.heal + int(num /6)
+        elif(towerFloor < 100):
+            self.heal = self.heal + int(num /8)
+        else:
+            self.heal = self.heal + int(num /10)
 
     def getHeal(self):
         return self.heal
