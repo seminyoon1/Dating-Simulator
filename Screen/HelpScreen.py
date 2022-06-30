@@ -28,7 +28,7 @@ def run():
         action=GameState.GameStates.GAME,
     )
 
-    UIElement.writeText("Currently Working on Help Screen", fontsize/2, WHITE, (width/6, height/6), screen)
+    UIElement.writeText("Figure it out by yourself", fontsize/2, WHITE, (width/20, height/16), screen)
 
     viewHelp = True
     while viewHelp:

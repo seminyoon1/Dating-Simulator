@@ -14,7 +14,7 @@ def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
 
 def writeText(text, font_size, text_rgb, position, surface):
     image = create_surface_with_text(text, font_size, text_rgb, None)
-    rect = image.get_rect(position)
+    rect = image.get_rect(topleft = position)
     return surface.blit(image, rect)
 
 
