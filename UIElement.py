@@ -12,6 +12,11 @@ def create_surface_with_text(text, font_size, text_rgb, bg_rgb):
     surface, _ = font.render(text=text, fgcolor=text_rgb, bgcolor=bg_rgb)
     return surface.convert_alpha()
 
+def writeText(text, font_size, text_rgb, position, surface):
+    image = create_surface_with_text(text, font_size, text_rgb, None)
+    rect = image.get_rect(position)
+    return surface.blit(image, rect)
+
 
 class UITextElement(Sprite):
     def __init__(self, center_position, text, font_size, bg_rgb, text_rgb, highlight_true, action=None):

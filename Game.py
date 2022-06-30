@@ -3,13 +3,13 @@ import pygame
 from pygame.locals import *
 import Main
 from Character_Data.Character import Character
-import Character_Data.CharacterStats as CharacterStats
+import Character_Data.Healing as Healing
 import Screen.StatsScreen as StatsScreen
 import Screen.EnemyScreen as EnemyScreen
 import Screen.BossScreen as BossScreen
 import Screen.EndScreen as EndScreen
 import Screen.SettingsScreen as SettingsScreen
-import Character_Data.Healing as Healing
+import Screen.HelpScreen as HelpScreen
 
 import GameState
 import UIElement
@@ -453,13 +453,14 @@ def game():
         if save_action is not None:
             gameFile = open('Character_Data/GameData.txt', 'w')
             gameFile.write(str(user.getCharacterInfo()) + "\n" + str(user.getCharacterStats()) + "\n")
-            gameFile.write(str(heal.getHeal()) + "\n" + str(towerFloor) + "\n" + str(recordDays) + "\n" + str(user.getDays()))
+            gameFile.write(str(heal.getHeal()) + "\n" + str(towerFloor) + "\n" + str(recordDays) + "\n" + str(user.getDays()) + "\n")
+            gameFile.write("ID: ")
             gameFile.close()
 
         if help_action is not None:
             screen.fill(BLACK)
             pygame.display.flip()
-            SettingsScreen.run()
+            HelpScreen.run()
             screen.fill(BLACK)
             pygame.display.flip()
 

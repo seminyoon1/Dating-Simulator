@@ -5,6 +5,7 @@ from pygame.locals import *
 import GameState
 import UIElement
 import Screen.StartScreen as StartScreen
+import Screen.SettingsScreen as Settings
 
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
@@ -27,8 +28,9 @@ def main():
     background = pygame.image.load('Assets\TowerBackground.jpg')
     background = pygame.transform.scale(background, (width, height))
 
-    pygame.mixer.music.load('Assets\AlexProductionsEpicCinematicTrailerElite.mp3')
-    pygame.mixer.music.play(-1)
+    if Settings.musicOn == True:
+        pygame.mixer.music.load('Assets\AlexProductionsEpicCinematicTrailerElite.mp3')
+        pygame.mixer.music.play(-1)
 
     # Display some text
     fontsize = 60
