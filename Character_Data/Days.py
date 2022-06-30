@@ -8,6 +8,9 @@ class Days():
     def getDays(self):
         return self.days
     
+    def setDays(self, num):
+        self.days = num
+    
     def resetDays(self):
         self.days = 0
 

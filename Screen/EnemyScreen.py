@@ -84,7 +84,7 @@ def run(towerFloor):
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
-            text= "Level: " + str(user.getLevel()),
+            text= "Level: " + str(int(user.getLevel())),
             highlight_true = False,
             action=None,
         )

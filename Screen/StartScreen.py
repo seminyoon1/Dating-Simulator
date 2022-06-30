@@ -75,8 +75,6 @@ def StartScreen():
             return Main.main()
         if game_action is not None:
             return Game.newGame()
-        if savedGame_action is not None:
-            return Game.savedGame()
         if record_action is not None:
             return RecordScreen.recordScreen()
         recordElement.draw(screen)
@@ -85,8 +83,10 @@ def StartScreen():
 
         gameFile = open('Character_Data/GameData.txt')
         gameDataText = gameFile.read()
-        if(gameDataText != "New Game"):
-            loadGameElement.draw(screen)
+        if savedGame_action is not None:
+            if gameDataText != "":
+                return Game.savedGame()
+        loadGameElement.draw(screen)
         gameFile.close()
 
         pygame.display.flip()

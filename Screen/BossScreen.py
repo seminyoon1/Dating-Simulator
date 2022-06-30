@@ -1,6 +1,8 @@
+from pickle import TRUE
 import pyautogui
 import pygame
 from pygame.locals import *
+import random
 
 import UIElement
 import Game
@@ -21,15 +23,43 @@ def run(towerFloor):
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
+    statUp = False
+    statName = ""
+    skillName = ""
+
+    if(towerFloor % 25 == 0):
+        statUp = True
+        statNum = random.randint(0,5)
+        statName = gameEnemy.getStatName(statNum)
+        gameEnemy.stats[statNum] = gameEnemy.stats[statNum] * 1.25
+        for i in range(0,5):
+            gameEnemy.stats[i] = gameEnemy.stats[i] * 1.2
+            skillName = ", All Stats"
+    elif(towerFloor % 5 == 0):
+        statUp = True
+        statNum = random.randint(0,5)
+        statName = gameEnemy.getStatName(statNum)
+        gameEnemy.stats[statNum] = gameEnemy.stats[statNum] * 1.25
+
     while 1:
         mouse_up = False
+
+        statNameElement = UIElement.UITextElement(
+            center_position=(width/6, height/8 + fontsize),
+            font_size=fontsize/3,
+            bg_rgb=None,
+            text_rgb=WHITE,
+            text= statName + skillName + " Up",
+            highlight_true = False,
+            action=None,
+        )
 
         nameElement = UIElement.UITextElement(
             center_position=(width/6, height/ 8),
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
-            text= "Floor " + str(towerFloor) + " " + " Boss",
+            text= "Floor " + str(towerFloor) + " Boss",
             highlight_true = False,
             action=None,
         )
@@ -80,7 +110,7 @@ def run(towerFloor):
             font_size=fontsize/2,
             bg_rgb=None,
             text_rgb=WHITE,
-            text= "Level: " + str(user.getLevel()),
+            text= "Level: " + str(int(user.getLevel())),
             highlight_true = False,
             action=None,
         )
@@ -107,8 +137,9 @@ def run(towerFloor):
         
         allElements = [nameElement, hitpointElement, hitEnemyElement, healthElement, energyElement, gameElement]
         for i in range(len(allElements)):
-                allElements[i].draw(screen)
-                
+            allElements[i].draw(screen)
+        if(statUp == True):
+             statNameElement.draw(screen)
         pygame.display.flip()
 
     return True

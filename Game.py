@@ -33,11 +33,19 @@ def newGame():
 
 def savedGame():
     global user, towerFloor, recordDays, heal
-    recordDays = [253, 257, 265, 279, 306]
     gameFile = open('Character_Data/GameData.txt')
     gameDataText = gameFile.read()
-    print(gameDataText)
-    #do something here to parse data
+    gameData = gameDataText.split("\n")
+    gameData[0] = tuple(map(float, gameData[0][1:len(gameData[0]) - 1].split(", ")))
+    level, hp, maxHp, energy, maxEnergy, exp, statPoints, expPoints = gameData[0]
+    gameData[1] = list(map(float, gameData[1][1:len(gameData[1]) - 1].split(", ")))
+    charStats = gameData[1]
+    user = Character(level, hp, maxHp, energy, maxEnergy, exp, statPoints, expPoints, charStats)
+    heal = Healing.Healing(int(gameData[2]))
+    towerFloor = int(gameData[3])
+    gameData[4] = gameData[4].replace("'", "")
+    recordDays = list(map(str, gameData[4][1:len(gameData[4]) - 1].split(", ")))
+    user.setDays(float(gameData[5]))
     gameFile.close()
     game()
 
@@ -81,7 +89,7 @@ def game():
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
-        text= "Level: " + str(user.getLevel()),
+        text= "Level: " + str(int(user.getLevel())),
         highlight_true = False,
         action=None,
     )
@@ -90,7 +98,7 @@ def game():
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
-        text= "Experience: " + str(user.getExperience()) + " / " + str(user.expToNextLevel()),
+        text= "Experience: " + str(int(user.getExperience())) + " / " + str(user.expToNextLevel()),
         highlight_true = False,
         action=None,
     )
@@ -175,6 +183,24 @@ def game():
         highlight_true = True,
         action=GameState.GameStates.SETTINGS,
     )
+    saveElement = UIElement.UITextElement(
+        center_position=(width*13 / 36, height* 11 / 12),
+        font_size=int(fontsize*2/3),
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Save",
+        highlight_true = True,
+        action=GameState.GameStates.SETTINGS,
+    )
+    helpElement = UIElement.UITextElement(
+        center_position=(width*23 / 36, height* 11 / 12),
+        font_size=int(fontsize*2/3),
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Help",
+        highlight_true = True,
+        action=GameState.GameStates.SETTINGS,
+    )
 
     allElements = [gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, healElement]
     for i in range(len(allElements)):
@@ -191,12 +217,16 @@ def game():
         boss_action = getBossElement.update(pygame.mouse.get_pos(), mouse_up)
         healing_action = healingElement.update(pygame.mouse.get_pos(), mouse_up)
         settings_action = settings.update(pygame.mouse.get_pos(), mouse_up)
+        save_action = saveElement.update(pygame.mouse.get_pos(), mouse_up)
+        help_action = helpElement.update(pygame.mouse.get_pos(), mouse_up)
 
         titleElement.draw(screen)
         getExpElement.draw(screen)
         getBossElement.draw(screen)
         healingElement.draw(screen)
         settings.draw(screen)
+        saveElement.draw(screen)
+        helpElement.draw(screen)
 
         screen.blit(heartImage, heart_center)
         screen.blit(enemyImage, enemy_center)
@@ -224,7 +254,7 @@ def game():
                 font_size=gameTextSize,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Level: " + str(user.getLevel()),
+                text= "Level: " + str(int(user.getLevel())),
                 highlight_true = False,
                 action=None,
             )
@@ -233,7 +263,7 @@ def game():
                 font_size=gameTextSize,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Experience: " + str(user.getExperience()) + " / " + str(user.expToNextLevel()),
+                text= "Experience: " + str(int(user.getExperience())) + " / " + str(user.expToNextLevel()),
                 highlight_true = False,
                 action=None,
             )
@@ -291,7 +321,7 @@ def game():
                 highlight_true = True,
                 action=GameState.GameStates.GAME,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, healingElement, settings]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, healingElement, settings, saveElement, helpElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
 
@@ -318,7 +348,7 @@ def game():
                 font_size=gameTextSize,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Level: " + str(user.getLevel()),
+                text= "Level: " + str(int(user.getLevel())),
                 highlight_true = False,
                 action=None,
             )
@@ -327,7 +357,7 @@ def game():
                 font_size=gameTextSize,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Experience: " + str(user.getExperience()) + " / " + str(user.expToNextLevel()),
+                text= "Experience: " + str(int(user.getExperience())) + " / " + str(user.expToNextLevel()),
                 highlight_true = False,
                 action=None,
             )
@@ -376,7 +406,7 @@ def game():
                 highlight_true = False,
                 action=GameState.GameStates.GAME,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings, saveElement, helpElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
         
@@ -406,7 +436,7 @@ def game():
                 action=None,
             )
 
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings, saveElement, helpElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
         if settings_action is not None:
@@ -415,13 +445,29 @@ def game():
             SettingsScreen.run()
             screen.fill(BLACK)
             pygame.display.flip()
-
             screen.blit(background, (width/8, height/8))
-
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings]
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings, saveElement, helpElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
 
+        if save_action is not None:
+            gameFile = open('Character_Data/GameData.txt', 'w')
+            gameFile.write(str(user.getCharacterInfo()) + "\n" + str(user.getCharacterStats()) + "\n")
+            gameFile.write(str(heal.getHeal()) + "\n" + str(towerFloor) + "\n" + str(recordDays) + "\n" + str(user.getDays()))
+            gameFile.close()
+
+        if help_action is not None:
+            screen.fill(BLACK)
+            pygame.display.flip()
+            SettingsScreen.run()
+            screen.fill(BLACK)
+            pygame.display.flip()
+
+            screen.blit(background, (width/8, height/8))
+
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings, saveElement, helpElement]
+            for i in range(len(allElements)):
+                allElements[i].draw(screen)
 
         pygame.display.flip()
     return EndScreen.EndScreen()

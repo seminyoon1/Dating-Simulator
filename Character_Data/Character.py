@@ -6,7 +6,7 @@ numOfDays = Days.newDays()
 
 class Character():
 
-    def __init__(self, level, hitpoints, maxHitpoints, energy, maxEnergy, experience, stats, statPoints, expPoints):
+    def __init__(self, level, hitpoints, maxHitpoints, energy, maxEnergy, experience, statPoints, expPoints, stats):
         """ 
         stats:
         defense = stats[0]
@@ -144,9 +144,19 @@ class Character():
     
     def addDays(self, num, energy):
         return numOfDays.addDays(num, energy)
-    
+
+    def setDays(self, num):
+        return numOfDays.setDays(num)
+        
     def newDays(self):
         return numOfDays.resetDays()
+
+    #Character creation/saving
+
+    def getCharacterInfo(self):
+        return self.level, self.hitpoints, self.maxHitpoints, self.energy, self.maxEnergy, self.experience, self.statPoints, self.expPoints
+    def getCharacterStats(self):
+        return self.stats
     
     def newCharacter():
-        return Character(1,100,100,10,10,0,Character_Data.CharacterStats.baseStats,0,0)
+        return Character(1,100,100,10,10,0,0,0,Character_Data.CharacterStats.baseStats)

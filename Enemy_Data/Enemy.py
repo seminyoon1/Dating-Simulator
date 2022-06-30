@@ -3,15 +3,6 @@ import random
 class Enemy():
 
     def __init__(self, hitpoints, maxHitpoints, stats, experience):
-        """ For viewing purposes only
-        stats:
-        defense = stats[0]
-        evasiveness = stats[1]
-        intelligence = stats[2]
-        attack = stats[3]
-        critical = stats[4]
-        power = stats[5]  
-        """
         self.hitpoints = hitpoints
         self.maxHitpoints = maxHitpoints
         self.stats = stats
@@ -54,11 +45,21 @@ class Enemy():
     
     def sendExperience(self):
         return self.experience
+    
+    def getStatName(self, num):
+        statDict = {
+        0: "Defense",
+        1: "Evasiveness",
+        2: "Intelligence",
+        3: "Attack",
+        4: "Critical",
+        5: "Power",
+        }
+        return statDict.get(num)
 
     def getNewEnemy(floor):
         #boss is 0% and 100%
         #4 types: normal: 75%, critical: 10%, tank: 10%, elite: 5%
-        #need floor status - later
         enemyType = random.random() * 100
         hitpoints = 40 + floor*5 + int(random.random() * (10 + floor))
         stats = []
