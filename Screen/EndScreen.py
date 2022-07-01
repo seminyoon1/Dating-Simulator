@@ -43,7 +43,7 @@ def EndScreen():
         if Game.recordDays[i] == "---":
             Game.recordDays[i] = round(Game.user.getDays(), 2)
             break
-        elif Game.recordDays[i] >= round(Game.user.getDays(), 2):
+        elif float(Game.recordDays[i]) >= round(Game.user.getDays(), 2):
             tempFirstData = Game.recordDays[i]
             Game.recordDays[i] = round(Game.user.getDays(), 2)
             for i in range(i,4):
@@ -51,6 +51,13 @@ def EndScreen():
                 Game.recordDays[i+1] = tempFirstData
                 tempFirstData = tempSecondData
             break
+
+    lines = open('Character_Data\GameData.txt', 'r').readlines()
+    lines[3] = '101\n'
+    lines[4] = str(Game.recordDays) + '\n'
+    out = open('Character_Data\GameData.txt', 'w')
+    out.writelines(lines)
+    out.close()
 
     while 1:
         mouse_up = False

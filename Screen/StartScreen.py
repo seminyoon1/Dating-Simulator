@@ -83,9 +83,12 @@ def StartScreen():
 
         gameFile = open('Character_Data/GameData.txt')
         gameDataText = gameFile.read()
+        gameLines = open('Character_Data\GameData.txt', 'r').readlines()
         if savedGame_action is not None:
             if gameDataText != "":
-                return Game.savedGame()
+                if int(gameLines[3]) <= 100:
+                    return Game.savedGame()
+            
         loadGameElement.draw(screen)
         gameFile.close()
 

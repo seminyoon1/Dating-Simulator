@@ -19,7 +19,9 @@ BLACK = (0, 0, 0)
 
 user = Character.newCharacter()
 towerFloor = 1
-recordDays = ["---", "---", "---", "---", "---"]
+lines = open('Character_Data\GameData.txt', 'r').readlines()
+lines[4] = lines[4].replace("'", "")
+recordDays = list(map(str, lines[4][1:len(lines[4]) - 1].split(", ")))
 heal = Healing.Healing.newHeal()
 
 def newGame():
