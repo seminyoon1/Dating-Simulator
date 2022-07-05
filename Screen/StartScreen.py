@@ -19,6 +19,7 @@ def StartScreen():
 
     background = pygame.image.load('Assets\TowerBackground.jpg')
     background = pygame.transform.scale(background, (width, height))
+    click = pygame.mixer.Sound('Assets\ClickSound.wav')
 
     fontsize = 60
     screen.blit(background, (0, 0))
@@ -72,10 +73,13 @@ def StartScreen():
         savedGame_action = loadGameElement.update(pygame.mouse.get_pos(), mouse_up)
         record_action = recordElement.update(pygame.mouse.get_pos(), mouse_up)
         if title_action is not None:
+            click.play()
             return Main.main()
         if game_action is not None:
+            click.play()
             return Game.newGame()
         if record_action is not None:
+            click.play()
             return RecordScreen.recordScreen()
         recordElement.draw(screen)
         newGameElement.draw(screen)
@@ -87,6 +91,7 @@ def StartScreen():
         if savedGame_action is not None:
             if gameDataText != "":
                 if int(gameLines[3]) <= 100:
+                    click.play()
                     return Game.savedGame()
             
         loadGameElement.draw(screen)

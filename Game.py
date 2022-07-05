@@ -73,6 +73,8 @@ def game():
     bossImage = pygame.image.load('Assets\GameImages\Boss.jpg')
     bossImage = pygame.transform.scale(bossImage, (60, 60))
     boss_center = ((width*3/6 - bossImage.get_width() / 2), (height*5/6 - 40 - bossImage.get_height() / 2))
+    
+    click = pygame.mixer.Sound('Assets\ClickSound.wav')
 
     screen.blit(background, (width/8, height/8))
     pygame.display.flip()
@@ -235,8 +237,10 @@ def game():
         screen.blit(bossImage, boss_center)
 
         if title_action is not None:
+            click.play()
             return Main.main()
         if getExp_action is not None: 
+            clikc.play()
             defeatedEnemy = EnemyScreen.run(towerFloor)
             if defeatedEnemy == True:
                 user.addDays(1/3, user.getEnergy())
@@ -328,6 +332,7 @@ def game():
                 allElements[i].draw(screen)
 
         if boss_action is not None:
+            click.play()
             defeatedEnemy = BossScreen.run(towerFloor)
             if defeatedEnemy == True:
                 user.addDays(1, user.getEnergy())
@@ -413,6 +418,7 @@ def game():
                 allElements[i].draw(screen)
         
         if healing_action is not None:
+            click.play()
             user.hitpoints = heal.autoHeal(user.hitpoints, user.maxHitpoints, 100)
             screen.fill(BLACK)
             pygame.display.flip()
@@ -442,6 +448,7 @@ def game():
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
         if settings_action is not None:
+            click.play()
             screen.fill(BLACK)
             pygame.display.flip()
             SettingsScreen.run()
@@ -453,6 +460,7 @@ def game():
                 allElements[i].draw(screen)
 
         if save_action is not None:
+            click.play()
             gameFile = open('Character_Data/GameData.txt', 'w')
             gameFile.write(str(user.getCharacterInfo()) + "\n" + str(user.getCharacterStats()) + "\n")
             gameFile.write(str(heal.getHeal()) + "\n" + str(towerFloor) + "\n" + str(recordDays) + "\n" + str(user.getDays()) + "\n")
@@ -460,6 +468,7 @@ def game():
             gameFile.close()
 
         if help_action is not None:
+            click.play()
             screen.fill(BLACK)
             pygame.display.flip()
             HelpScreen.run()

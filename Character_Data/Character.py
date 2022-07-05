@@ -110,7 +110,7 @@ class Character():
         return self.experience
     
     def expToNextLevel(self):
-        return int(self.level * self.level/8 * (201-self.level) * (1 + self.expPoints/250))
+        return int(self.level * self.level/8 * (201-self.level) * (1 + self.expPoints/300))
 
     def addExperience(self, num):
         self.experience = int((self.experience + num) * (0.95 + self.stats[2] / 100))

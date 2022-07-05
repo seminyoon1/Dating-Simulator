@@ -31,6 +31,8 @@ def main():
     if Settings.musicOn == True:
         pygame.mixer.music.load('Assets\AlexProductionsEpicCinematicTrailerElite.mp3')
         pygame.mixer.music.play(-1)
+        
+    click = pygame.mixer.Sound('Assets\ClickSound.wav')
 
     # Display some text
     fontsize = 60
@@ -75,9 +77,11 @@ def main():
                 mouse_up = True
         quit_action = quitElement.update(pygame.mouse.get_pos(), mouse_up)
         if quit_action is not None:
+            click.play()
             return
         start_action = startElement.update(pygame.mouse.get_pos(), mouse_up)
         if start_action is not None:
+            click.play()
             return StartScreen.StartScreen()
         quitElement.draw(screen)
         startElement.draw(screen)

@@ -16,6 +16,8 @@ def EndScreen():
     screen = pygame.display.set_mode((width, height))
     background = pygame.Surface(screen.get_size())
 
+    click = pygame.mixer.Sound('Assets\ClickSound.wav')
+
     fontsize = 60
     screen.blit(background, (0, 0))
     pygame.display.flip()
@@ -66,6 +68,7 @@ def EndScreen():
                 mouse_up = True
         title_action = titleElement.update(pygame.mouse.get_pos(), mouse_up)
         if title_action is not None:
+            click.play()
             return Main.main()
         finishedGameElement.draw(screen)
         titleElement.draw(screen)

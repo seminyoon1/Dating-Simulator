@@ -13,6 +13,7 @@ def run():
     width, height = pyautogui.size()
     screen = pygame.display.set_mode((width, height))
     background = pygame.Surface(screen.get_size())
+    click = pygame.mixer.Sound('Assets\ClickSound.wav')
 
     fontsize = 60
     screen.blit(background, (0, 0))
@@ -38,6 +39,7 @@ def run():
                 mouse_up = True
         title_action = titleElement.update(pygame.mouse.get_pos(), mouse_up)
         if title_action is not None:
+            click.play()
             viewHelp = False    
 
         titleElement.draw(screen)

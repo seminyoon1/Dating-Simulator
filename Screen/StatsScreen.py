@@ -119,16 +119,25 @@ def run():
             user.changeStatPoints(-1)
         if critical_action is not None:
             user.maxEnergy, user.stats = Character_Data.CharacterStats.addCritical(user.maxEnergy, user.stats)
-            user.energy = user.energy + 0.4
+            user.energy = user.energy + 0.2
             user.changeStatPoints(-1)
 
         screen.fill(BLACK)
-        #use loop to make this more efficent
-        defenseElement.draw(screen)
-        evasivenessElement.draw(screen)
-        intelligenceElement.draw(screen)
-        attackElement.draw(screen)
-        powerElement.draw(screen)
-        criticalElement.draw(screen)
-        textElement.draw(screen)
+
+        UIElement.writeText("[Reduces damage taken.]", fontsize/3, WHITE, (width*2/6,(height*2/8 - fontsize/4)), screen)
+        UIElement.writeText("[Bonus: Slight boost to your health and intelligence.]", fontsize/3, WHITE, (width*2/6, (height*2/8) + fontsize/4), screen)
+        UIElement.writeText("[Higher chance of receiving no damage.]", fontsize/3, WHITE, (width*2/6, (height*3/8)-fontsize/4), screen)
+        UIElement.writeText("[Bonus: Slight boost to your defense.]", fontsize/3, WHITE, (width*2/6, (height*3/8)+fontsize/4), screen)
+        UIElement.writeText("[Increase the amount of EXP received.]", fontsize/3, WHITE, (width*2/6, (height*4/ 8)-fontsize/4), screen)
+        UIElement.writeText("[Bonus: Slight boost to your energy and critical.]", fontsize/3, WHITE, (width*2/6, (height*4/ 8)+fontsize/4), screen)
+        UIElement.writeText("[Increase damage sent.]", fontsize/3, WHITE, (width*2/6, (height*5/ 8)-fontsize/4), screen)
+        UIElement.writeText("[Bonus: Slight boost to your power and critical.]", fontsize/3, WHITE, (width*2/6, (height*5/ 8)+fontsize/4), screen)
+        UIElement.writeText("[Increase critical and normal damage.]", fontsize/3, WHITE, (width*2/6, (height*6/ 8) - fontsize/4), screen)
+        UIElement.writeText("[Bonus: Slight boost to your energy and attack.]", fontsize/3, WHITE, (width*2/6, (height*6/ 8) + fontsize/4), screen)
+        UIElement.writeText("[Higher chance of dealing critical damage.]", fontsize/3, WHITE, (width*2/6, (height*7/ 8)-fontsize/4), screen)
+        UIElement.writeText("[Bonus: Slight boost to your attack and power.]", fontsize/3, WHITE, (width*2/6, (height*7/ 8)+fontsize/4), screen)
+
+        allElements = [defenseElement, evasivenessElement, intelligenceElement, attackElement, powerElement, criticalElement, textElement]
+        for i in range(len(allElements)):
+            allElements[i].draw(screen)
         pygame.display.flip()
