@@ -240,7 +240,7 @@ def game():
             click.play()
             return Main.main()
         if getExp_action is not None: 
-            clikc.play()
+            click.play()
             defeatedEnemy = EnemyScreen.run(towerFloor)
             if defeatedEnemy == True:
                 user.addDays(1/3, user.getEnergy())
