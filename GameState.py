@@ -9,3 +9,4 @@ class GameStates(Enum):
     RECORD = 4
     SETTINGS = 5
     MUSIC = 6
+    HEAL = 7

@@ -254,6 +254,9 @@ def game():
             pygame.display.flip()
 
             screen.blit(background, (width/8, height/8))
+            print(SettingsScreen.healOn)
+            if SettingsScreen.healOn == True:
+                user.hitpoints = heal.autoHeal(user.hitpoints, user.maxHitpoints, 100)
         
             gameElement = UIElement.UITextElement(
                 center_position=(width*1 / 10, height* 1 / 10),
