@@ -64,7 +64,7 @@ def run(towerFloor):
             action=None,
         )
         HP = gameEnemy.getHitpoints()
-        if HP < 1:
+        if HP < 1 and HP > 0:
             HP = 1
         hitpointElement = UIElement.UITextElement(
             center_position=(width/6, height/8 + fontsize/2),

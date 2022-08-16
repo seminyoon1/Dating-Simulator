@@ -29,7 +29,19 @@ def run():
         action=GameState.GameStates.GAME,
     )
 
-    UIElement.writeText("Figure it out by yourself", fontsize/2, WHITE, (width/20, height/16), screen)
+    UIElement.writeText("User Information:", fontsize/2, WHITE, (width/20, (height/16)), screen)
+    UIElement.writeText("Level: Capped at 100, will receive 2 stat points per level.", fontsize/3, WHITE, (width/20, (height/16) + (3 * fontsize/6)), screen)
+    UIElement.writeText("Experience: Needed to level up.", fontsize/3, WHITE, (width/20, (height/16) + (5 * fontsize/6)), screen)
+    UIElement.writeText("Health: Receive up to 5 additional days upon death.", fontsize/3, WHITE, (width/20, (height/16) + (7 * fontsize/6)), screen)
+    UIElement.writeText("Energy: Higher energy reduces the total amount of days. Reset every floor.", fontsize/3, WHITE, (width/20, (height/16) + (9 * fontsize/6)), screen)
+    UIElement.writeText("Lifedrain: Received by beating normal enemies. Used to heal yourself.", fontsize/3, WHITE, (width/20, (height/16) + (11 * fontsize/6)), screen)
+    UIElement.writeText("Days: Used to track progress and set record.", fontsize/3, WHITE, (width/20, (height/16) + (13 * fontsize/6)), screen)
+    UIElement.writeText("Floor: Beat Floor 100 Boss to clear the game.", fontsize/3, WHITE, (width/20, (height/16) + (15 * fontsize/6)), screen)
+    UIElement.writeText("Enemy Information:", fontsize/2, WHITE, (width/20, (height*5/16)), screen)
+    UIElement.writeText("Enemy: Gives lifedrain when defeated. Higher floor enemies give less lifedrain.", fontsize/3, WHITE, (width/20, (height*5/16) + (3 * fontsize/6)), screen)
+    UIElement.writeText("Boss: Every 5th boss will have a boost to one of their stats, 25th boss will have a boost to all stats.", fontsize/3, WHITE, (width/20, (height*5/16) + (5 * fontsize/6)), screen)
+    UIElement.writeText("Enemy experience given will increase with higher floor level.", fontsize/3, WHITE, (width/20, (height*5/16) + (7 * fontsize/6)), screen)
+
 
     viewHelp = True
     while viewHelp:

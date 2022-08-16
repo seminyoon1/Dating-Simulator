@@ -7,6 +7,7 @@ import Screen.RecordScreen as RecordScreen
 
 import GameState
 import UIElement
+import Opening
 
 BLUE = (106, 159, 181)
 BLACK = (0, 0, 0)
@@ -77,6 +78,7 @@ def StartScreen():
             return Main.main()
         if game_action is not None:
             click.play()
+            Opening.main()
             return Game.newGame()
         if record_action is not None:
             click.play()
