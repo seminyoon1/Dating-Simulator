@@ -64,15 +64,15 @@ def game():
 
     heartImage = pygame.image.load('Assets\GameImages\RedHeart.png')
     heartImage = pygame.transform.scale(heartImage, (60, 60))
-    heart_center = ((width*5/6 - heartImage.get_width() / 2), (height*5/6 - 40 - heartImage.get_height() / 2))
+    heart_center = ((width*4/5 - heartImage.get_width() / 2), (height*5/6 - 40 - heartImage.get_height() / 2))
 
     enemyImage = pygame.image.load('Assets\GameImages\enemy.png')
     enemyImage = pygame.transform.scale(enemyImage, (60, 60))
-    enemy_center = ((width*1/6 - enemyImage.get_width() / 2), (height*5/6 - 40 - enemyImage.get_height() / 2))
+    enemy_center = ((width*2/5 - enemyImage.get_width() / 2), (height*5/6 - 40 - enemyImage.get_height() / 2))
 
     bossImage = pygame.image.load('Assets\GameImages\Boss.jpg')
     bossImage = pygame.transform.scale(bossImage, (60, 60))
-    boss_center = ((width*3/6 - bossImage.get_width() / 2), (height*5/6 - 40 - bossImage.get_height() / 2))
+    boss_center = ((width*3/5 - bossImage.get_width() / 2), (height*5/6 - 40 - bossImage.get_height() / 2))
     
     click = pygame.mixer.Sound('Assets\ClickSound.wav')
 
@@ -107,7 +107,7 @@ def game():
         action=None,
     )
     getExpElement = UIElement.UITextElement(
-        center_position=(width*1 / 6, height* 5 / 6),
+        center_position=(width*2/5, height* 5 / 6),
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
@@ -144,15 +144,15 @@ def game():
     )
     floorElement = UIElement.UITextElement(
         center_position=(width*5 / 10, (height* 1 / 10)),
-        font_size=gameTextSize,
+        font_size=gameTextSize*2,
         bg_rgb=None,
         text_rgb=WHITE,
-        text= "Current Floor: " + str(towerFloor),
+        text= "Floor " + str(towerFloor),
         highlight_true = False,
         action=None,
     )
     getBossElement = UIElement.UITextElement(
-        center_position=(width*3 / 6, height* 5 / 6),
+        center_position=(width*3/5, height* 5 / 6),
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
@@ -170,7 +170,7 @@ def game():
         action=GameState.GameStates.GAME,
     )
     healingElement = UIElement.UITextElement(
-        center_position=(width*5 / 6, height* 5 / 6),
+        center_position=(width*4/5, height* 5 / 6),
         font_size=gameTextSize,
         bg_rgb=None,
         text_rgb=WHITE,
@@ -305,10 +305,10 @@ def game():
             )
             floorElement = UIElement.UITextElement(
                 center_position=(width*5 / 10, (height* 1 / 10)),
-                font_size=gameTextSize,
+                font_size=gameTextSize*2,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Current Floor: " + str(towerFloor),
+                text= "Floor " + str(towerFloor),
                 highlight_true = False,
                 action=None,
             )
@@ -400,10 +400,10 @@ def game():
             )
             floorElement = UIElement.UITextElement(
                 center_position=(width*5 / 10, (height* 1 / 10)),
-                font_size=gameTextSize,
+                font_size=gameTextSize * 2,
                 bg_rgb=None,
                 text_rgb=WHITE,
-                text= "Current Floor: " + str(towerFloor),
+                text= "Floor " + str(towerFloor),
                 highlight_true = False,
                 action=None,
             )

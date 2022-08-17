@@ -92,7 +92,7 @@ class Enemy():
         return Enemy(hitpoints, hitpoints, stats, experience), name
 
     def getBoss(floor):
-        hitpoints = 80 + floor*15 + int(random.random() * (10 + floor*2))
+        hitpoints = 80 + floor*16 + int(random.random() * (10 + floor*3))
         stats = []
         total = hitpoints
         for i in range(6):
