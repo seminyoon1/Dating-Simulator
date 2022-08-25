@@ -94,13 +94,10 @@ def recordScreen():
         if title_action is not None:
             click.play()
             viewRecord = False
-        recordOneElement.draw(screen)
-        recordTwoElement.draw(screen)
-        recordThreeElement.draw(screen)
-        recordFourElement.draw(screen)
-        recordFiveElement.draw(screen)
-        topElement.draw(screen)
-        titleElement.draw(screen)
+        
+        allElements = [recordOneElement, recordTwoElement, recordThreeElement, recordFourElement, recordFiveElement, topElement, titleElement]
+        for i in range(len(allElements)):
+            allElements[i].draw(screen)
 
         pygame.display.flip()
     return Main.main()

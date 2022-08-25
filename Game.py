@@ -74,6 +74,10 @@ def game():
     bossImage = pygame.transform.scale(bossImage, (60, 60))
     boss_center = ((width*3/5 - bossImage.get_width() / 2), (height*5/6 - 40 - bossImage.get_height() / 2))
     
+    characterImage = pygame.image.load('Assets\GameImages\character.png')
+    characterImage = pygame.transform.scale(characterImage, (60, 60))
+    character_center = ((width*1/5 - characterImage.get_width() / 2), (height*5/6 - 40 - characterImage.get_height() / 2))
+
     click = pygame.mixer.Sound('Assets\ClickSound.wav')
 
     screen.blit(background, (width/8, height/8))
@@ -178,6 +182,16 @@ def game():
         highlight_true = True,
         action=GameState.GameStates.GAME,
     )
+    characterElement = UIElement.UITextElement(
+        center_position=(width*1/5, height* 5 / 6),
+        font_size=gameTextSize,
+        bg_rgb=None,
+        text_rgb=WHITE,
+        text= "Character Info",
+        highlight_true = True,
+        action=GameState.GameStates.GAME,
+    )
+
     settings = UIElement.UITextElement(
         center_position=(width*11 / 12, height* 11 / 12),
         font_size=int(fontsize*2/3),
@@ -220,6 +234,7 @@ def game():
         getExp_action = getExpElement.update(pygame.mouse.get_pos(), mouse_up)
         boss_action = getBossElement.update(pygame.mouse.get_pos(), mouse_up)
         healing_action = healingElement.update(pygame.mouse.get_pos(), mouse_up)
+        character_action= characterElement.update(pygame.mouse.get_pos(), mouse_up)
         settings_action = settings.update(pygame.mouse.get_pos(), mouse_up)
         save_action = saveElement.update(pygame.mouse.get_pos(), mouse_up)
         help_action = helpElement.update(pygame.mouse.get_pos(), mouse_up)
@@ -228,6 +243,7 @@ def game():
         getExpElement.draw(screen)
         getBossElement.draw(screen)
         healingElement.draw(screen)
+        characterElement.draw(screen)
         settings.draw(screen)
         saveElement.draw(screen)
         helpElement.draw(screen)
@@ -235,6 +251,7 @@ def game():
         screen.blit(heartImage, heart_center)
         screen.blit(enemyImage, enemy_center)
         screen.blit(bossImage, boss_center)
+        screen.blit(characterImage, character_center)
 
         if title_action is not None:
             click.play()
@@ -330,7 +347,16 @@ def game():
                 highlight_true = True,
                 action=GameState.GameStates.GAME,
             )
-            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, healingElement, settings, saveElement, helpElement]
+            characterElement = UIElement.UITextElement(
+                center_position=(width*1/5, height* 5 / 6),
+                font_size=gameTextSize,
+                bg_rgb=None,
+                text_rgb=WHITE,
+                text= "Character Info",
+                highlight_true = True,
+                action=GameState.GameStates.GAME,
+            )
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, healingElement, characterElement, settings, saveElement, helpElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
 
@@ -419,7 +445,8 @@ def game():
             allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings, saveElement, helpElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
-        
+        if character_action is not None:
+            print("Hi!")
         if healing_action is not None:
             click.play()
             user.hitpoints = heal.autoHeal(user.hitpoints, user.maxHitpoints, 100)
