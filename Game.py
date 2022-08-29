@@ -5,6 +5,7 @@ import Main
 from Character_Data.Character import Character
 import Character_Data.Healing as Healing
 import Screen.StatsScreen as StatsScreen
+import Screen.CharacterScreen as CharacterScreen
 import Screen.EnemyScreen as EnemyScreen
 import Screen.BossScreen as BossScreen
 import Screen.EndScreen as EndScreen
@@ -445,8 +446,6 @@ def game():
             allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings, saveElement, helpElement]
             for i in range(len(allElements)):
                 allElements[i].draw(screen)
-        if character_action is not None:
-            print("Hi!")
         if healing_action is not None:
             click.play()
             user.hitpoints = heal.autoHeal(user.hitpoints, user.maxHitpoints, 100)
@@ -502,6 +501,20 @@ def game():
             screen.fill(BLACK)
             pygame.display.flip()
             HelpScreen.run()
+            screen.fill(BLACK)
+            pygame.display.flip()
+
+            screen.blit(background, (width/8, height/8))
+
+            allElements = [titleElement, gameElement, expElement, getExpElement, daysElement, healthElement, energyElement, floorElement, getBossElement, healElement, settings, saveElement, helpElement]
+            for i in range(len(allElements)):
+                allElements[i].draw(screen)
+        
+        if character_action is not None:
+            click.play()
+            screen.fill(BLACK)
+            pygame.display.flip()
+            CharacterScreen.run()
             screen.fill(BLACK)
             pygame.display.flip()
 
